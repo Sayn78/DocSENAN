@@ -8,9 +8,9 @@
 }
 
 provider "proxmox" {
-  pm_api_url      = "https://192.168.1.10:8006/api2/json"
+  pm_api_url      = "https://192.168.1.X:8006/api2/json"
   pm_user         = "root@pam"
-  pm_password     = "exchg@03"
+  pm_password     = "motdepasse"
   pm_tls_insecure = true
 }
 
@@ -38,7 +38,7 @@ resource "proxmox_vm_qemu" "vm_web" {
 
   sshkeys = file("~/.ssh/id_ed25519.pub")
   ciuser = "senan"
-  cipassword = "exchg@03"
+  cipassword = "motdepasse"
 }
 
 
