@@ -6,5 +6,5 @@
 
 ## Commandes
 
-- [Git](docs/commande_Git.md)
-- [Utile](docs/commande_utile.md)
+- [Git](docs/Commande_Git.md)
+- [Utile](docs/Commande_utile.md)
