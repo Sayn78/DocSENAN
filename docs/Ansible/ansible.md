@@ -24,7 +24,7 @@ Ce fichier sert a repertorier la liste de tes serveur
 
 ```bash
 [webservers]
-<ec2-XX-XX-XX-XX.eu-west-3.compute.amazonaws.com> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/votrecleSSH
+ec2-XX-XX-XX-XX.eu-west-3.compute.amazonaws.com ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/votrecleSSH
 ```
 
 ## Étape 3 : Tester la connexion SSH
