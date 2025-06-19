@@ -9,7 +9,6 @@ Avant d'installer Terraform, assurez-vous d'avoir les éléments suivants :
 - Une machine virtuelle Ubuntu avec un accès SSH.
 - Un compte utilisateur avec des privilèges `sudo`.
 
-- 
 ## Étape 1 : Mise à jour des paquets système
 
 Avant d'installer Terraform, il est recommandé de mettre à jour les paquets de votre système pour garantir que vous disposez des dernières versions des outils nécessaires. Exécutez la commande suivante :
