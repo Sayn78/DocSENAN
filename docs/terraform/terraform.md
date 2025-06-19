@@ -97,7 +97,7 @@ Copie/colle son contenu dans le champ "Public key contents"
 Valide
 
 
-### 3.4 : Créer un fichier de configuration Terraform (serveur web aws EC2)
+### 3.4 : Créer un fichier de configuration "main.tf" pour Terraform (serveur web aws EC2)
 
 ```bash
 provider "aws" {
@@ -129,7 +129,7 @@ terraform apply
 ```
 
 
-Tu as maintenant une nouvelle instance sur AWS de créer (instance EC2)
+Tu as maintenant une nouvelle instance sur AWS de crée (instance EC2)
 
 
 ### 3.7 : connection SSH
