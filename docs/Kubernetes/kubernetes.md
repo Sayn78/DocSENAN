@@ -166,3 +166,63 @@ sudo kubeadm reset
 - Exemples : `kubectl get pods`, `kubectl apply -f fichier.yaml`, `kubectl logs`, etc.
 
 ---
+
+---
+
+## 🛠️ Commandes `kubectl` utiles à connaître
+
+### 🔍 Obtenir des informations générales
+
+```bash
+kubectl cluster-info                      # Infos du cluster
+kubectl get nodes                         # Liste des nœuds
+kubectl get pods --all-namespaces         # Tous les pods
+kubectl get services                      # Services actifs
+kubectl get deployments                   # Déploiements
+kubectl get namespaces                    # Espaces de noms
+```
+
+---
+
+### 📋 Détail d’une ressource
+
+```bash
+kubectl describe node <nom_du_nœud>       # Détail d’un nœud
+kubectl describe pod <nom_du_pod>         # Détail d’un pod
+kubectl describe service <nom_du_service> # Détail d’un service
+```
+
+---
+
+### 🧪 Debug & erreurs
+
+```bash
+kubectl logs <nom_du_pod>                 # Logs d’un pod
+kubectl logs -f <nom_du_pod>              # Logs en continu
+kubectl exec -it <pod> -- /bin/bash       # Accéder à un pod en shell
+kubectl get events --sort-by=.metadata.creationTimestamp  # Événements récents
+```
+
+---
+
+### 🔄 Gestion rapide
+
+```bash
+kubectl apply -f fichier.yaml             # Appliquer un manifeste
+kubectl delete -f fichier.yaml            # Supprimer ce qui a été déployé
+kubectl rollout restart deployment <nom>  # Redémarrer un déploiement
+kubectl delete pod <nom>                  # Supprimer un pod
+```
+
+---
+
+### 📦 Ressources utiles avec noms et namespaces
+
+```bash
+kubectl get pods -A                       # Tous les pods (tous namespaces)
+kubectl get all -n <namespace>           # Tout voir dans un namespace
+kubectl config get-contexts              # Liste des contextes kubectl
+kubectl config current-context           # Contexte actif
+```
+
+---
