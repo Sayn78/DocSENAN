@@ -6,10 +6,13 @@ Configuration initiale de Git
 git config --global user.name "Ton Nom"
 git config --global user.email "ton@email.com"
 ```
+
 Cloner un dépôt GitHub
 ```bash
-git clone https://github.com/utilisateur/nom-du-repo.git
+git init                          # Initialise un dépôt local
+git clone <url_du_repo>          # Clone un dépôt distant
 ```
+
 Créer un nouveau dépôt local
 ```bash
 mkdir mon-projet
