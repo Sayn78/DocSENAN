@@ -13,6 +13,16 @@ sudo adduser senan
 sudo usermod -aG sudo senan
 ```
 
+### #Générer une clé SSH
+```bash
+ssh-keygen -t ed25519 -C "ton.email@example.com"  
+```
+
+### Ajouter la clé à l’agent SSH
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
 
 ### UFW (pare-feu)
 ```bash
@@ -27,30 +37,4 @@ sudo ufw enable
 sudo apt install fail2ban -y
 sudo systemctl enable fail2ban
 sudo systemctl start fail2ban
-```
-
-## Docker
-### Installation Docker
-```bash
-sudo apt install docker.io -y
-```
-### Installation Docker Compose
-```bash
-sudo apt install docker-compose -y
-```
-
-### Lancement Nginx
-```bash
-docker run -d -p 8080:80 --name webserver nginx
-```
-
-### Docker Compose (multi-container)
-- Fichier docker-compose.yml avec services : mariadb, phpmyadmin, nginx
-Lancement :
-```bash
-docker compose up -d
-```
-Arret :
-```bash
-docker compose down
 ```
