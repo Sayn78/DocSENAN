@@ -1,5 +1,5 @@
 
-### Commandes Git :
+# Commandes Git :
 
 ## Configuration initiale de Git
 ```bash
