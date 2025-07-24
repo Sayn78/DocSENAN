@@ -131,3 +131,38 @@ sudo journalctl -u kubelet -n 100 --no-pager
 sudo kubeadm reset
 ```
 
+---
+
+## 🧩 kubeadm, kubelet et kubectl – Définition et rôles
+
+| Composant  | Rôle                           | Où ça s'exécute             | Utilisation principale                    |
+|------------|--------------------------------|-----------------------------|-------------------------------------------|
+| `kubeadm`  | Configuration du cluster       | Manuellement (CLI)          | Initialiser, rejoindre, réinitialiser     |
+| `kubelet`  | Agent sur chaque nœud          | Service sur chaque nœud     | Gérer les pods localement                 |
+| `kubectl`  | Interface en ligne de commande | Sur ta machine (admin/dev) | Gérer le cluster, appliquer du YAML       |
+
+---
+
+### 🔹 kubeadm – Le configurateur de cluster
+
+- Outil CLI pour créer ou rejoindre un cluster Kubernetes
+- Gère les certificats, les tokens, l'initialisation du control plane
+- Exemples : `kubeadm init`, `kubeadm join`, `kubeadm reset`
+
+---
+
+### 🔹 kubelet – L’agent des nœuds
+
+- Service système présent sur tous les nœuds
+- Lance et surveille les pods
+- Communique avec l’API Kubernetes et le container runtime
+
+---
+
+### 🔹 kubectl – L’outil de commande du cluster
+
+- Client CLI pour interagir avec le cluster via l’API server
+- Permet de lister, créer, modifier, supprimer les objets Kubernetes
+- Exemples : `kubectl get pods`, `kubectl apply -f fichier.yaml`, `kubectl logs`, etc.
+
+---
