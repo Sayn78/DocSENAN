@@ -35,6 +35,29 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt
 
 ---
 
+## 📦 Étape 1.5 – Installer et configurer containerd (obligatoire)
+
+```bash
+sudo apt install -y containerd
+```
+
+# Créer la configuration par défaut
+```bash
+sudo mkdir -p /etc/containerd
+sudo containerd config default | sudo tee /etc/containerd/config.toml
+```
+
+# Modifier config.toml : activer SystemdCgroup (important)
+```bash
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+```
+
+# Redémarrer containerd
+```bash
+sudo systemctl restart containerd
+sudo systemctl enable containerd
+```
+
 ## 🧱 Étape 2 – Installer kubelet, kubeadm et kubectl
 
 ```bash
