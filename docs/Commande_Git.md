@@ -1,48 +1,67 @@
 
-## Commandes GitHub sur une VM Linux :
+### Commandes Git :
 
-Configuration initiale de Git
+## Configuration initiale de Git
 ```bash
 git config --global user.name "Ton Nom"
 git config --global user.email "ton@email.com"
 ```
 
-Cloner un dépôt GitHub
+## 📁 Initialisation et Clonage
 ```bash
 git init                          # Initialise un dépôt local
 git clone <url_du_repo>          # Clone un dépôt distant
 ```
 
-Créer un nouveau dépôt local
+## 📄 Gestion des fichiers
 ```bash
-mkdir mon-projet
-cd mon-projet
-git init
+git status                       # Voir l’état des fichiers
+git add <fichier>                # Suivre un fichier
+git add .                        # Suivre tous les fichiers modifiés
+git reset <fichier>              # Enlever un fichier de l’index
 ```
-Ajouter un dépôt distant
+
+## 💬 Commits & Historique
 ```bash
-git remote add origin https://github.com/utilisateur/nom-du-repo.git
+git commit -m "Message"          # Enregistre les modifications
+git log                          # Historique des commits
+git diff                         # Voir les modifications
+git show <hash_commit>          # Voir le détail d’un commit
 ```
-Ajouter, valider et pousser du code
+
+## 🌿 Branches
 ```bash
-git add .
-git commit -m "Message de commit"
-git push origin main
+git branch                       # Liste les branches
+git branch <nom>                # Crée une nouvelle branche
+git checkout <nom>              # Bascule vers une branche
+git checkout -b <nom>           # Crée et bascule en même temps
+git merge <branche>             # Fusionne une branche
+git branch -d <nom>             # Supprime une branche locale
 ```
-Récupérer les dernières modifications
+
+## ☁️ Dépôt distant (GitHub)
 ```bash
-git pull origin main
+git remote -v                    # Voir les remotes
+git push origin <branche>       # Pousser vers le dépôt distant
+git pull origin <branche>       # Récupérer les changements
+git fetch                       # Récupère sans fusion
 ```
-Créer et changer de branche
+
+## 🏷️ Tags (versions)
 ```bash
-git branch ma-branche
-git checkout ma-branche
+git tag v1.0.0                   # Créer un tag
+git push origin v1.0.0          # Envoyer le tag
 ```
-Voir le statut du dépôt
+
+## 🧼 Annulations
 ```bash
-git status
+git restore <fichier>           # Annule changements non commités
+git reset --soft HEAD~1         # Annule le dernier commit (garde fichiers)
+git reset --hard HEAD~1         # Supprime commit + fichiers
+git revert <commit_hash>       # Inverse un commit sans réécrire l’historique
 ```
-Historique des commits
+
+## 🔄 Passer d’un dépôt HTTPS à SSH
 ```bash
-git log
+git remote set-url origin git@github.com:TonUser/nom-du-repo.git
 ```
