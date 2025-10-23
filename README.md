@@ -144,8 +144,6 @@ Un grand merci à tous les contributeurs qui ont participé à ce projet !
 
 <div align="center">
 
-**🚀 Bon apprentissage ! 🚀**
-
 *Si ce repository vous a aidé, n'oubliez pas de laisser une ⭐*
 
 [⬆ Retour en haut](#-documentation-hub)
