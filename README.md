@@ -20,9 +20,7 @@ Explorez les sections [Infrastructure as Code](#-infrastructure-as-code) et [Con
 - [⚙️ Infrastructure as Code](#️-infrastructure-as-code)
 - [🐳 Containerisation & Orchestration](#-containerisation--orchestration)
 - [💻 Commandes Essentielles](#-commandes-essentielles)
-- [🤝 Contribution](#-contribution)
-- [📞 Support](#-support)
-
+  
 ---
 
 ## 🛠️ Environnements de Développement
