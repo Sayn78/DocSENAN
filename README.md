@@ -126,11 +126,15 @@ Collection de commandes shell pratiques pour votre quotidien.
 📖 [Commandes Utiles](docs/Commande_utile.md)
 
 **Catégories :**
-- Gestion des fichiers et répertoires
-- Processus et système
-- Réseau et connectivité
-- Recherche et filtrage
-- Astuces et raccourcis
+- 📁 Navigation & Gestion des fichiers
+- 🔎 Recherche & Affichage
+- 👥 Gestion des utilisateurs
+- ⚙️ Système & Processus
+- 📦 Gestion des paquets (apt)
+- 🌐 Réseau & Connectivité
+- 🔐 Droits & Permissions
+- 🔒 Sécurité (UFW, Fail2Ban, SSH)
+- 🧹 Maintenance & Nettoyage
 
 ---
 
