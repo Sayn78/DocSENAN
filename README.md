@@ -107,16 +107,27 @@ Orchestrez vos conteneurs à grande échelle avec Kubernetes.
 ## 💻 Commandes Essentielles
 
 ### 🔀 Git
-Commandes Git pour gérer vos dépôts et collaborer efficacement.
+Guide complet des commandes Git, des bases aux techniques avancées.
 
 📖 [Commandes Git](docs/Commande_Git.md)
 
-**Inclut :**
-- Initialisation et configuration
-- Branches et merges
-- Résolution de conflits
-- Commandes avancées
-- Workflows Git
+**Contenu :**
+- ⚙️ Configuration initiale
+- 📁 Initialisation et clonage
+- 📄 Gestion des fichiers (add, status, reset)
+- 💬 Commits & Historique détaillé
+- 🌿 Gestion des branches
+- 🔧 Résolution de conflits
+- 🗂️ Stash (sauvegardes temporaires)
+- ☁️ Dépôts distants (push, pull, fetch)
+- 🏷️ Tags et versions
+- 🧼 Annulations et corrections
+- 🚀 Commandes avancées (rebase, cherry-pick, bisect, reflog)
+- 🔀 Workflows (GitFlow, Feature Branch, Trunk-Based)
+- 🔄 Migration HTTPS → SSH
+- 🔍 Recherche & Investigation
+- 💡 Astuces, alias et raccourcis
+- 🚨 Commandes de secours
 
 ---
 
