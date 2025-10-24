@@ -23,15 +23,13 @@ Explorez les sections [Infrastructure as Code](#-infrastructure-as-code) et [Con
   
 ---
 
-## 🛠️ Environnements de Développement
+### 🛠️ Environnements de Développement
 
 Guides d'installation et de configuration pour tous les langages et frameworks populaires.
 
-| Langage/Framework | Description | Lien |
-|-------------------|-------------|------|
-| **Guide Complet** | Installation de Node.js, Python, Java, .NET, PHP, Go, Rust | [📖 Voir le guide](docs/Development_Environment_Setup_Guide.md) |
+📖 [Documentation Development Environmennt](docs/Development_Environment_Setup_Guide.md) |
 
-**Inclut :**
+**Contenu :**
 - ✅ Node.js & NPM
 - ✅ Python & Flask
 - ✅ Java & Maven
