@@ -42,6 +42,36 @@ Guides d'installation et de configuration pour tous les langages et frameworks p
 
 ---
 
+### 🗄️ Bases de Données
+Guide complet pour installer et gérer vos bases de données SQL et NoSQL.
+
+📖 [Documentation Bases de Données](docs/DatabaseGuide.md)
+
+**Contenu :**
+- 🐘 **PostgreSQL** - Base relationnelle avancée
+  - Installation & configuration
+  - Gestion des utilisateurs et privilèges
+  - Dumps & restauration
+  - Commandes et requêtes utiles
+- 🦭 **MariaDB/MySQL** - Base relationnelle populaire
+  - Installation (MariaDB & MySQL)
+  - Gestion des utilisateurs et hôtes
+  - Sauvegarde & restauration
+  - Optimisation et monitoring
+- 🍃 **MongoDB** - Base NoSQL orientée documents
+  - Installation et configuration
+  - CRUD et requêtes
+  - Gestion des utilisateurs
+  - Import/Export de données
+- 🔴 **Redis** - Cache et stockage en mémoire
+  - Installation et commandes de base
+  - Gestion des clés et TTL
+  - Persistence et sauvegarde
+- 🔄 **Comparaison & Choix** - Quand utiliser quoi ?
+- 🔒 **Sécurité** - Bonnes pratiques communes
+
+---
+
 ## ⚙️ Infrastructure as Code
 
 Automatisez la gestion de votre infrastructure avec les meilleurs outils du marché.
