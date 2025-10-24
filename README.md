@@ -27,7 +27,7 @@ Explorez les sections [Infrastructure as Code](#-infrastructure-as-code) et [Con
 
 Guides d'installation et de configuration pour tous les langages et frameworks populaires.
 
-📖 [Documentation Development Environmennt](docs/Development_Environment_Setup_Guide.md) |
+📖 [Documentation Development Environment](docs/Development_Environment_Setup_Guide.md)
 
 **Contenu :**
 - ✅ Node.js & NPM
