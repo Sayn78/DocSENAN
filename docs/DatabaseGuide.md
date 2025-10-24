@@ -191,7 +191,7 @@ pg_restore -U developer -h 127.0.0.1 -d myapp_db --clean --if-exists myapp_db.du
 
 ### 🛠️ Commandes Utiles PostgreSQL
 
-#### Vérifier le statsu de la connection :
+#### Vérifier le status de la connection :
 ```bash
 pg_isready
 ```
