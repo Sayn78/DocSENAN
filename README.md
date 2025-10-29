@@ -75,15 +75,56 @@ Guide complet pour installer et gérer vos bases de données SQL et NoSQL.
 Automatisez la gestion de votre infrastructure avec les meilleurs outils du marché.
 
 ### 🏗️ Terraform
-Créez, modifiez et versionnez votre infrastructure de manière sécurisée et efficace.
+Infrastructure as Code pour provisionner et gérer vos ressources cloud.
 
 📖 [Documentation Terraform](docs/terraform/terraform.md)
 
-**Ce que vous apprendrez :**
-- Création de ressources cloud (AWS, Azure, GCP)
-- Gestion de l'état (state management)
-- Modules réutilisables
-- Bonnes pratiques
+**Contenu :**
+- 🎯 **Introduction aux concepts** (Provider, Resource, State, Module)
+- 📥 **Installation**
+  - Méthode manuelle (version spécifique)
+  - Via dépôt HashiCorp (recommandée)
+  - Configuration de l'autocomplétion
+- ☁️ **Configuration AWS complète**
+  - Installation AWS CLI
+  - Création utilisateur IAM
+  - Configuration des credentials (3 méthodes)
+  - Gestion des clés SSH
+  - Import de clés dans AWS
+- 🚀 **Premiers pas**
+  - Structure de projet
+  - Fichier main.tf complet (EC2 + Security Groups)
+  - Variables et outputs
+- 🎮 **Commandes essentielles**
+  - Cycle de vie (init, plan, apply, destroy)
+  - Commandes avancées (import, taint, graph)
+- 📁 **Structure de fichiers**
+  - Organisation recommandée
+  - variables.tf, outputs.tf, versions.tf
+  - .gitignore pour Terraform
+- 🔧 **Ressources avancées**
+  - VPC complet
+  - RDS (bases de données)
+  - Load Balancer + Auto Scaling
+- 💾 **State Management**
+  - Backend S3 + DynamoDB
+  - Verrouillage d'état
+- 📦 **Modules réutilisables**
+  - Création de modules
+  - Utilisation et partage
+- 🎯 **Cas d'usage pratiques**
+  - Stack LAMP complète
+  - Application avec Load Balancer
+  - Infrastructure multi-environnements
+- 🔄 **Workspaces** (gestion d'environnements)
+- 🔐 **Gestion des secrets** (Secrets Manager, env vars)
+- 📈 **Monitoring & Logging** (CloudWatch)
+- 🧪 **Tests & Validation** (TFLint, Terratest)
+- 🔄 **CI/CD** (GitHub Actions, GitLab CI)
+- 📊 **AMI IDs par région**
+- 🔌 **Connexion SSH aux instances**
+- 🚨 **Dépannage complet**
+- ✅ **Bonnes pratiques de sécurité**
 
 ---
 
