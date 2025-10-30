@@ -170,7 +170,7 @@ Guide complet pour conteneuriser et déployer vos applications avec Docker.
 ### ☸️ Kubernetes
 Orchestrez vos conteneurs à grande échelle avec Kubernetes.
 
-📖 [Documentation Kubernetes](docs/Kubernetes/k8s.md)
+📖 [Documentation Kubernetes](docs/Kubernetes/kubernetes.md)
 
 **Contenu :**
 - 🔹 Pods, Services, Deployments
