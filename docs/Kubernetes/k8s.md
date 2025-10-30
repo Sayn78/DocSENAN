@@ -2,108 +2,182 @@
 
 ## 📋 Table des Matières
 - [Introduction](#-introduction)
-- [Concepts fondamentaux](#-concepts-fondamentaux)
+- [Guides d'Installation](#-guides-dinstallation)
+- [Architecture Kubernetes](#-architecture-kubernetes)
+- [Concepts Fondamentaux](#-concepts-fondamentaux)
 - [Installation kubectl](#-installation-kubectl)
-- [Commandes essentielles](#-commandes-essentielles)
+- [Commandes kubectl essentielles](#-commandes-kubectl-essentielles)
 - [Objets Kubernetes](#-objets-kubernetes)
-- [Déploiement d'applications](#-déploiement-dapplications)
-- [Configuration & Secrets](#-configuration--secrets)
-- [Réseau & Services](#-réseau--services)
-- [Stockage](#-stockage)
-- [Mise à l'échelle](#-mise-à-léchelle)
-- [Monitoring & Logs](#-monitoring--logs)
+- [Configuration & Manifests](#-configuration--manifests)
+- [Networking](#-networking)
+- [Storage](#-storage)
+- [ConfigMaps & Secrets](#-configmaps--secrets)
 - [Bonnes pratiques](#-bonnes-pratiques)
-- [Dépannage](#-dépannage)
+- [Ressources Complémentaires](#-ressources-complémentaires)
+
+---
+
+## 🚀 Guides d'Installation
+
+Choisissez le guide correspondant à votre besoin :
+
+| Guide | Description | Cas d'usage |
+|-------|-------------|-------------|
+| 📗 **[Minikube](./minikube.md)** | Kubernetes local sur une machine | Développement local, apprentissage, tests |
+| 🐄 **[K3s](./k3s.md)** | Kubernetes léger et rapide | IoT, Edge, Raspberry Pi, serveurs légers |
+| 📘 **[EKS](./eks.md)** | Kubernetes managé sur AWS | Production, cloud AWS, haute disponibilité |
+
+### Comparaison rapide
+
+| Critère | Minikube | K3s | EKS |
+|---------|----------|-----|-----|
+| **Environnement** | Local | Local/Serveur | AWS Cloud |
+| **Complexité** | 🟢 Simple | 🟢 Simple | 🟡 Moyenne |
+| **Coût** | Gratuit | Gratuit | ~$150/mois |
+| **RAM minimale** | 2GB | 512MB | N/A (cloud) |
+| **Production** | ❌ Non | ✅ Oui | ✅ Oui |
+| **Installation** | 5 min | 1 min | 20 min |
+| **Multi-node** | ⚠️ Limité | ✅ Oui | ✅ Oui |
 
 ---
 
 ## 🎯 Introduction
 
-**Kubernetes (K8s)** est une plateforme open-source d'orchestration de conteneurs permettant d'automatiser le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées.
+**Kubernetes (K8s)** est une plateforme open-source d'orchestration de conteneurs qui automatise le déploiement, la mise à l'échelle et la gestion des applications conteneurisées.
 
 ### Pourquoi Kubernetes ?
-- ✅ **Haute disponibilité** : Redémarrage automatique des conteneurs défaillants
-- ✅ **Scalabilité** : Mise à l'échelle automatique selon la charge
-- ✅ **Déploiements sans interruption** : Rolling updates et rollbacks
-- ✅ **Auto-healing** : Détection et remplacement des pods défaillants
-- ✅ **Gestion de configuration** : ConfigMaps et Secrets
-- ✅ **Load balancing** : Distribution automatique du trafic
-- ✅ **Multi-cloud** : Fonctionne sur AWS, Azure, GCP, on-premise
+- ✅ **Scalabilité** : Mise à l'échelle automatique des applications
+- ✅ **Haute disponibilité** : Redondance et self-healing
+- ✅ **Portabilité** : Fonctionne sur n'importe quel cloud ou on-premise
+- ✅ **Déploiement déclaratif** : État désiré vs état actuel
+- ✅ **Service discovery** : DNS et load balancing intégrés
+- ✅ **Rolling updates** : Déploiements sans downtime
 
-### Alternatives à Kubernetes
-- **Minikube** : K8s local pour développement ([voir guide](./minikube.md))
-- **EKS** : Kubernetes managé sur AWS ([voir guide](./eks.md))
-- **GKE** : Kubernetes managé sur Google Cloud
-- **AKS** : Kubernetes managé sur Azure
-- **Docker Swarm** : Orchestrateur plus simple
-- **Nomad** : Alternative HashiCorp
+### Cas d'usage
+- Microservices
+- Applications cloud-native
+- CI/CD pipelines
+- Applications stateful et stateless
+- Machine Learning workloads
+
+---
+
+## 🏗️ Architecture Kubernetes
+
+### Composants du Control Plane (Master)
+
+```
+┌─────────────────── Control Plane ───────────────────┐
+│                                                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌───────────┐ │
+│  │  API Server  │  │  Scheduler   │  │Controller │ │
+│  │   (kube-api) │  │(kube-scheduler│  │ Manager   │ │
+│  └──────────────┘  └──────────────┘  └───────────┘ │
+│                                                      │
+│  ┌──────────────┐                                   │
+│  │     etcd     │  (Base de données clé-valeur)     │
+│  └──────────────┘                                   │
+└──────────────────────────────────────────────────────┘
+
+┌─────────────────── Worker Nodes ────────────────────┐
+│                                                      │
+│  Node 1              Node 2              Node 3     │
+│  ┌────────┐         ┌────────┐         ┌────────┐  │
+│  │ Kubelet│         │ Kubelet│         │ Kubelet│  │
+│  ├────────┤         ├────────┤         ├────────┤  │
+│  │  Pods  │         │  Pods  │         │  Pods  │  │
+│  └────────┘         └────────┘         └────────┘  │
+│  kube-proxy         kube-proxy         kube-proxy  │
+└──────────────────────────────────────────────────────┘
+```
+
+#### Composants principaux
+
+**Control Plane :**
+- **API Server** : Point d'entrée pour toutes les requêtes REST
+- **etcd** : Stockage clé-valeur distribué (état du cluster)
+- **Scheduler** : Assigne les Pods aux Nodes
+- **Controller Manager** : Gère les contrôleurs (ReplicaSet, Deployment, etc.)
+- **Cloud Controller Manager** : Intégration avec les APIs cloud
+
+**Worker Nodes :**
+- **Kubelet** : Agent qui s'assure que les conteneurs tournent
+- **Container Runtime** : Docker, containerd, CRI-O
+- **kube-proxy** : Gère les règles réseau sur les nodes
 
 ---
 
 ## 🧩 Concepts Fondamentaux
-
-### Architecture Kubernetes
-
-```
-┌─────────────────────────────────────────────┐
-│           CONTROL PLANE (Master)            │
-├─────────────────────────────────────────────┤
-│  API Server  │  Scheduler  │  Controller    │
-│  etcd (DB)   │  Cloud Controller Manager    │
-└─────────────────────────────────────────────┘
-                    ↓ ↓ ↓
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│   NODE 1     │  │   NODE 2     │  │   NODE 3     │
-├──────────────┤  ├──────────────┤  ├──────────────┤
-│  Kubelet     │  │  Kubelet     │  │  Kubelet     │
-│  Kube-proxy  │  │  Kube-proxy  │  │  Kube-proxy  │
-│  Container   │  │  Container   │  │  Container   │
-│  Runtime     │  │  Runtime     │  │  Runtime     │
-├──────────────┤  ├──────────────┤  ├──────────────┤
-│  Pod  Pod    │  │  Pod  Pod    │  │  Pod  Pod    │
-└──────────────┘  └──────────────┘  └──────────────┘
-```
-
-### Composants du Control Plane
-- **API Server** : Point d'entrée pour toutes les opérations
-- **etcd** : Base de données clé-valeur pour l'état du cluster
-- **Scheduler** : Assigne les pods aux nodes
-- **Controller Manager** : Gère les contrôleurs (ReplicaSet, Deployment, etc.)
-
-### Composants des Nodes
-- **Kubelet** : Agent sur chaque node, gère les pods
-- **Kube-proxy** : Gère le réseau et le load balancing
-- **Container Runtime** : Docker, containerd, CRI-O
 
 ### Hiérarchie des objets
 
 ```
 Cluster
 └── Namespace
-    └── Deployment
-        └── ReplicaSet
-            └── Pod
-                └── Container(s)
+    ├── Pod
+    │   └── Container(s)
+    ├── Service
+    ├── Deployment
+    │   └── ReplicaSet
+    │       └── Pod(s)
+    ├── ConfigMap
+    ├── Secret
+    └── Ingress
 ```
+
+### Namespace
+Isolation logique des ressources dans un cluster.
+
+```yaml
+# Namespaces par défaut
+default           # Namespace par défaut
+kube-system       # Objets créés par Kubernetes
+kube-public       # Accessible à tous
+kube-node-lease   # Heartbeats des nodes
+```
+
+### Pod
+Plus petite unité déployable, contient un ou plusieurs conteneurs.
+
+### Service
+Point d'accès stable pour un ensemble de Pods.
+
+### Deployment
+Gestion déclarative des Pods et ReplicaSets.
+
+### ConfigMap & Secret
+Configuration et données sensibles.
+
+### Ingress
+Exposition HTTP/HTTPS des services.
 
 ---
 
 ## 📥 Installation kubectl
 
-### Linux
+### Linux (Debian/Ubuntu)
 
 ```bash
-# Télécharger la dernière version
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+# Méthode 1 : Via package manager (recommandée)
+sudo apt update
+sudo apt install -y apt-transport-https ca-certificates curl
 
-# Vérifier le checksum (optionnel)
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+# Ajouter la clé GPG de Kubernetes
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+# Ajouter le dépôt Kubernetes
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 # Installer kubectl
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+sudo apt update
+sudo apt install -y kubectl
 
 # Vérifier l'installation
+kubectl version --client
+
+# Méthode 2 : Binaire direct
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
@@ -112,11 +186,6 @@ kubectl version --client
 ```bash
 # Via Homebrew
 brew install kubectl
-
-# Ou téléchargement direct
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
-chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
 
 # Vérifier
 kubectl version --client
@@ -128,8 +197,8 @@ kubectl version --client
 # Via Chocolatey
 choco install kubernetes-cli
 
-# Ou via Scoop
-scoop install kubectl
+# Ou téléchargement direct
+curl.exe -LO "https://dl.k8s.io/release/v1.29.0/bin/windows/amd64/kubectl.exe"
 
 # Vérifier
 kubectl version --client
@@ -140,62 +209,145 @@ kubectl version --client
 ```bash
 # Bash
 echo 'source <(kubectl completion bash)' >> ~/.bashrc
-echo 'alias k=kubectl' >> ~/.bashrc
-echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
+source ~/.bashrc
 
 # Zsh
 echo 'source <(kubectl completion zsh)' >> ~/.zshrc
-echo 'alias k=kubectl' >> ~/.zshrc
-echo 'complete -F __start_kubectl k' >> ~/.zshrc
+source ~/.zshrc
 
-# Recharger
-source ~/.bashrc  # ou source ~/.zshrc
+# Alias utile
+echo 'alias k=kubectl' >> ~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 ```
 
 ---
 
-## 🎮 Commandes Essentielles
+## 🎮 Commandes kubectl Essentielles
 
-### Gestion du contexte
+### Configuration et contexte
 
 ```bash
 # Voir la configuration actuelle
 kubectl config view
 
-# Lister les contextes
+# Lister les contextes (clusters)
 kubectl config get-contexts
-
-# Voir le contexte actuel
-kubectl config current-context
 
 # Changer de contexte
 kubectl config use-context <nom_contexte>
 
+# Voir le contexte actuel
+kubectl config current-context
+
+# Créer un contexte
+kubectl config set-context <nom> --cluster=<cluster> --user=<user> --namespace=<namespace>
+
 # Définir le namespace par défaut
-kubectl config set-context --current --namespace=<nom_namespace>
+kubectl config set-context --current --namespace=<namespace>
 ```
 
 ---
 
-### Informations sur le cluster
+### Gestion des Pods
 
 ```bash
-# Informations générales
-kubectl cluster-info
+# Lister les pods
+kubectl get pods
+kubectl get pods -n <namespace>
+kubectl get pods --all-namespaces
+kubectl get pods -o wide
 
-# Version du cluster
-kubectl version
+# Détails d'un pod
+kubectl describe pod <nom_pod>
 
-# Lister les nodes
-kubectl get nodes
-kubectl get nodes -o wide
+# Créer un pod depuis une image
+kubectl run <nom_pod> --image=<image>
 
-# Détails d'un node
-kubectl describe node <nom_node>
+# Exemple
+kubectl run nginx --image=nginx:latest
 
-# Utilisation des ressources
-kubectl top nodes        # Nécessite metrics-server
-kubectl top pods
+# Supprimer un pod
+kubectl delete pod <nom_pod>
+
+# Logs d'un pod
+kubectl logs <nom_pod>
+kubectl logs -f <nom_pod>                    # Follow logs
+kubectl logs <nom_pod> -c <nom_conteneur>    # Conteneur spécifique
+kubectl logs --previous <nom_pod>            # Logs du conteneur précédent
+
+# Exécuter une commande dans un pod
+kubectl exec <nom_pod> -- <commande>
+kubectl exec -it <nom_pod> -- bash
+kubectl exec -it <nom_pod> -- sh
+
+# Port forwarding
+kubectl port-forward <nom_pod> 8080:80
+
+# Copier des fichiers
+kubectl cp <nom_pod>:/chemin/fichier ./fichier
+kubectl cp ./fichier <nom_pod>:/chemin/
+```
+
+---
+
+### Gestion des Deployments
+
+```bash
+# Créer un deployment
+kubectl create deployment <nom> --image=<image>
+
+# Exemple
+kubectl create deployment nginx-deploy --image=nginx:latest
+
+# Lister les deployments
+kubectl get deployments
+kubectl get deploy
+
+# Détails
+kubectl describe deployment <nom>
+
+# Mettre à l'échelle
+kubectl scale deployment <nom> --replicas=<nombre>
+kubectl scale deployment nginx-deploy --replicas=5
+
+# Autoscaling
+kubectl autoscale deployment <nom> --min=2 --max=10 --cpu-percent=80
+
+# Mettre à jour l'image
+kubectl set image deployment/<nom> <conteneur>=<nouvelle_image>
+kubectl set image deployment/nginx-deploy nginx=nginx:1.25
+
+# Voir l'historique des rollouts
+kubectl rollout history deployment/<nom>
+
+# Rollback
+kubectl rollout undo deployment/<nom>
+kubectl rollout undo deployment/<nom> --to-revision=2
+
+# Statut du rollout
+kubectl rollout status deployment/<nom>
+
+# Supprimer
+kubectl delete deployment <nom>
+```
+
+---
+
+### Gestion des Services
+
+```bash
+# Créer un service
+kubectl expose deployment <nom> --port=80 --type=LoadBalancer
+
+# Lister les services
+kubectl get services
+kubectl get svc
+
+# Détails
+kubectl describe service <nom>
+
+# Supprimer
+kubectl delete service <nom>
 ```
 
 ---
@@ -209,255 +361,87 @@ kubectl get ns
 
 # Créer un namespace
 kubectl create namespace <nom>
-kubectl create ns dev
 
 # Supprimer un namespace
 kubectl delete namespace <nom>
 
-# Tout faire dans un namespace spécifique
+# Travailler dans un namespace spécifique
 kubectl get pods -n <namespace>
-kubectl get pods --all-namespaces
-kubectl get pods -A  # Raccourci
+kubectl apply -f file.yaml -n <namespace>
 ```
 
 ---
 
-### Gestion des Pods
+### Appliquer des manifests YAML
 
 ```bash
-# Lister les pods
-kubectl get pods
-kubectl get pods -o wide
-kubectl get pods --watch
-kubectl get pods -w
-
-# Détails d'un pod
-kubectl describe pod <nom_pod>
-
-# Logs d'un pod
-kubectl logs <nom_pod>
-kubectl logs <nom_pod> -f              # Suivre les logs
-kubectl logs <nom_pod> --tail=50       # 50 dernières lignes
-kubectl logs <nom_pod> --since=10m     # 10 dernières minutes
-kubectl logs <nom_pod> -c <conteneur>  # Logs d'un conteneur spécifique
-
-# Exécuter une commande dans un pod
-kubectl exec <nom_pod> -- <commande>
-kubectl exec <nom_pod> -- ls /app
-kubectl exec <nom_pod> -- env
-
-# Shell interactif dans un pod
-kubectl exec -it <nom_pod> -- /bin/bash
-kubectl exec -it <nom_pod> -- sh
-
-# Pour un conteneur spécifique (si plusieurs dans le pod)
-kubectl exec -it <nom_pod> -c <conteneur> -- /bin/bash
-
-# Copier des fichiers
-kubectl cp <nom_pod>:<chemin_source> <destination_locale>
-kubectl cp <source_locale> <nom_pod>:<chemin_destination>
-
-# Exemples
-kubectl cp monpod:/app/logs/app.log ./local.log
-kubectl cp ./config.json monpod:/app/config/
-
-# Port forwarding (accès local)
-kubectl port-forward <nom_pod> <port_local>:<port_pod>
-kubectl port-forward monpod 8080:80
-
-# Supprimer un pod
-kubectl delete pod <nom_pod>
-kubectl delete pod <nom_pod> --grace-period=0 --force  # Forcer
-```
-
----
-
-### Gestion des Deployments
-
-```bash
-# Lister les deployments
-kubectl get deployments
-kubectl get deploy
-
-# Détails d'un deployment
-kubectl describe deployment <nom>
-
-# Créer un deployment
-kubectl create deployment <nom> --image=<image>
-kubectl create deployment nginx --image=nginx:latest
-
-# Mettre à jour l'image
-kubectl set image deployment/<nom> <conteneur>=<nouvelle_image>
-kubectl set image deployment/nginx nginx=nginx:1.21
-
-# Scaler un deployment
-kubectl scale deployment <nom> --replicas=<nombre>
-kubectl scale deployment nginx --replicas=3
-
-# Autoscaling
-kubectl autoscale deployment <nom> --min=2 --max=10 --cpu-percent=80
-
-# Rollout (mise à jour progressive)
-kubectl rollout status deployment/<nom>
-kubectl rollout history deployment/<nom>
-kubectl rollout undo deployment/<nom>              # Annuler le dernier rollout
-kubectl rollout undo deployment/<nom> --to-revision=2  # Revenir à une révision
-
-# Mettre en pause/reprendre un rollout
-kubectl rollout pause deployment/<nom>
-kubectl rollout resume deployment/<nom>
-
-# Redémarrer un deployment
-kubectl rollout restart deployment/<nom>
-
-# Supprimer un deployment
-kubectl delete deployment <nom>
-```
-
----
-
-### Gestion des Services
-
-```bash
-# Lister les services
-kubectl get services
-kubectl get svc
-
-# Détails d'un service
-kubectl describe service <nom>
-
-# Créer un service
-kubectl expose deployment <nom> --port=80 --type=LoadBalancer
-
-# Types de services
-kubectl expose deployment nginx --port=80 --type=ClusterIP      # Interne
-kubectl expose deployment nginx --port=80 --type=NodePort       # Externe via port node
-kubectl expose deployment nginx --port=80 --type=LoadBalancer   # Load balancer cloud
-
-# Supprimer un service
-kubectl delete service <nom>
-```
-
----
-
-### Gestion des ConfigMaps
-
-```bash
-# Lister les ConfigMaps
-kubectl get configmaps
-kubectl get cm
-
-# Créer depuis un fichier
-kubectl create configmap <nom> --from-file=<fichier>
-
-# Créer depuis des valeurs littérales
-kubectl create configmap <nom> --from-literal=<clé>=<valeur>
-kubectl create configmap app-config --from-literal=ENV=production --from-literal=DEBUG=false
-
-# Voir le contenu
-kubectl describe configmap <nom>
-kubectl get configmap <nom> -o yaml
-
-# Supprimer
-kubectl delete configmap <nom>
-```
-
----
-
-### Gestion des Secrets
-
-```bash
-# Lister les secrets
-kubectl get secrets
-
-# Créer un secret générique
-kubectl create secret generic <nom> --from-literal=<clé>=<valeur>
-kubectl create secret generic db-secret --from-literal=password=SuperSecret123
-
-# Créer depuis un fichier
-kubectl create secret generic <nom> --from-file=<fichier>
-
-# Secret pour Docker Registry
-kubectl create secret docker-registry <nom> \
-  --docker-server=<serveur> \
-  --docker-username=<user> \
-  --docker-password=<pass> \
-  --docker-email=<email>
-
-# Voir un secret (base64 encodé)
-kubectl get secret <nom> -o yaml
-
-# Décoder un secret
-kubectl get secret <nom> -o jsonpath='{.data.password}' | base64 --decode
-
-# Supprimer
-kubectl delete secret <nom>
-```
-
----
-
-### Gestion avec YAML
-
-```bash
-# Appliquer une configuration
+# Appliquer un fichier
 kubectl apply -f <fichier.yaml>
-kubectl apply -f deployment.yaml
-kubectl apply -f ./configs/      # Dossier entier
 
-# Créer depuis YAML
-kubectl create -f <fichier.yaml>
+# Appliquer un dossier
+kubectl apply -f <dossier>/
 
-# Supprimer depuis YAML
+# Appliquer depuis une URL
+kubectl apply -f https://example.com/manifest.yaml
+
+# Supprimer depuis un fichier
 kubectl delete -f <fichier.yaml>
 
-# Voir la config générée d'une ressource
-kubectl get deployment <nom> -o yaml
-kubectl get pod <nom> -o json
+# Dry-run (tester sans appliquer)
+kubectl apply -f <fichier.yaml> --dry-run=client
+kubectl apply -f <fichier.yaml> --dry-run=server
 
-# Éditer une ressource existante
-kubectl edit deployment <nom>
-kubectl edit pod <nom>
-
-# Dry-run (tester sans créer)
-kubectl apply -f deployment.yaml --dry-run=client
-kubectl apply -f deployment.yaml --dry-run=server
-
-# Valider un fichier YAML
-kubectl apply -f deployment.yaml --validate=true --dry-run=client
+# Voir les différences avant d'appliquer
+kubectl diff -f <fichier.yaml>
 ```
 
 ---
 
-### Commandes de dépannage
+### Informations sur le cluster
 
 ```bash
+# Informations du cluster
+kubectl cluster-info
+
+# Voir les nodes
+kubectl get nodes
+kubectl get nodes -o wide
+kubectl describe node <nom_node>
+
+# Ressources disponibles
+kubectl top nodes
+kubectl top pods
+
 # Événements du cluster
 kubectl get events
 kubectl get events --sort-by='.lastTimestamp'
-kubectl get events -n <namespace>
 
-# Ressources consommées
-kubectl top nodes
-kubectl top pods
-kubectl top pod <nom_pod>
-
-# Débug d'un pod qui ne démarre pas
-kubectl describe pod <nom_pod>
-kubectl logs <nom_pod>
-kubectl logs <nom_pod> --previous  # Logs du conteneur précédent
-
-# Lister toutes les ressources
-kubectl get all
-kubectl get all -A  # Tous les namespaces
-
-# API resources disponibles
+# API resources
 kubectl api-resources
+kubectl api-versions
+```
 
-# Vérifier la connectivité réseau
-kubectl run -it --rm debug --image=busybox --restart=Never -- sh
-# Dans le pod :
-# nslookup <service>
-# wget -O- <service>:<port>
+---
+
+### Debug et troubleshooting
+
+```bash
+# Voir les logs d'événements
+kubectl get events --sort-by='.metadata.creationTimestamp'
+
+# Déboguer un pod qui crash
+kubectl describe pod <nom_pod>
+kubectl logs <nom_pod> --previous
+
+# Créer un pod temporaire pour debug
+kubectl run debug --image=busybox --rm -it --restart=Never -- sh
+
+# Tester la connectivité réseau
+kubectl run netshoot --image=nicolaka/netshoot --rm -it --restart=Never -- bash
+
+# Vérifier les permissions
+kubectl auth can-i create pods
+kubectl auth can-i create pods --as=<user>
 ```
 
 ---
@@ -465,8 +449,6 @@ kubectl run -it --rm debug --image=busybox --restart=Never -- sh
 ## 📦 Objets Kubernetes
 
 ### Pod
-
-Le plus petit objet déployable dans Kubernetes.
 
 ```yaml
 # pod.yaml
@@ -479,7 +461,7 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: nginx:1.21
+    image: nginx:latest
     ports:
     - containerPort: 80
     resources:
@@ -494,15 +476,12 @@ spec:
 ```bash
 kubectl apply -f pod.yaml
 kubectl get pods
-kubectl logs nginx-pod
-kubectl delete pod nginx-pod
+kubectl describe pod nginx-pod
 ```
 
 ---
 
 ### Deployment
-
-Gère les ReplicaSets et permet les mises à jour progressives.
 
 ```yaml
 # deployment.yaml
@@ -524,7 +503,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.21
+        image: nginx:1.25
         ports:
         - containerPort: 80
         resources:
@@ -551,27 +530,21 @@ spec:
 ```bash
 kubectl apply -f deployment.yaml
 kubectl get deployments
-kubectl get rs  # ReplicaSets créés
 kubectl get pods
 kubectl scale deployment nginx-deployment --replicas=5
-kubectl set image deployment/nginx-deployment nginx=nginx:1.22
-kubectl rollout status deployment/nginx-deployment
 ```
 
 ---
 
 ### Service
 
-Expose des pods via un point d'accès stable.
-
+#### ClusterIP (par défaut)
 ```yaml
-# service.yaml
-
-# ClusterIP (par défaut) - Accessible uniquement dans le cluster
+# service-clusterip.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-service-internal
 spec:
   type: ClusterIP
   selector:
@@ -580,13 +553,15 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
+```
 
----
-# NodePort - Accessible via IP du node + port
+#### NodePort
+```yaml
+# service-nodeport.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-nodeport
+  name: nginx-service-nodeport
 spec:
   type: NodePort
   selector:
@@ -596,13 +571,15 @@ spec:
     port: 80
     targetPort: 80
     nodePort: 30080  # Port entre 30000-32767
+```
 
----
-# LoadBalancer - Crée un load balancer cloud
+#### LoadBalancer
+```yaml
+# service-loadbalancer.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-loadbalancer
+  name: nginx-service-lb
 spec:
   type: LoadBalancer
   selector:
@@ -614,20 +591,313 @@ spec:
 ```
 
 ```bash
-kubectl apply -f service.yaml
-kubectl get svc
-kubectl describe svc nginx-service
+kubectl apply -f service-loadbalancer.yaml
+kubectl get services
+kubectl describe service nginx-service-lb
 
-# Tester depuis le cluster
-kubectl run -it --rm debug --image=busybox --restart=Never -- sh
-wget -O- nginx-service
+# Obtenir l'URL externe (LoadBalancer)
+kubectl get service nginx-service-lb -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 ```
 
 ---
 
-### ConfigMap
+### ReplicaSet
 
-Stocke des données de configuration non confidentielles.
+```yaml
+# replicaset.yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+```
+
+**Note :** En pratique, utilisez plutôt des Deployments qui gèrent automatiquement les ReplicaSets.
+
+---
+
+### StatefulSet
+
+Pour les applications stateful (bases de données, etc.)
+
+```yaml
+# statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+```
+
+---
+
+### DaemonSet
+
+Un pod par node (monitoring, logs, etc.)
+
+```yaml
+# daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+spec:
+  selector:
+    matchLabels:
+      name: fluentd
+  template:
+    metadata:
+      labels:
+        name: fluentd
+    spec:
+      containers:
+      - name: fluentd
+        image: fluent/fluentd:latest
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+```
+
+---
+
+### Job
+
+Tâche ponctuelle
+
+```yaml
+# job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: backup
+        image: backup-tool:latest
+        command: ["./backup.sh"]
+      restartPolicy: OnFailure
+  backoffLimit: 4
+```
+
+---
+
+### CronJob
+
+Tâche planifiée
+
+```yaml
+# cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-cronjob
+spec:
+  schedule: "0 2 * * *"  # Tous les jours à 2h
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: backup-tool:latest
+            command: ["./backup.sh"]
+          restartPolicy: OnFailure
+```
+
+---
+
+## 🌐 Networking
+
+### Ingress
+
+Routage HTTP/HTTPS avancé
+
+```yaml
+# ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-service
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 8080
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: tls-secret
+```
+
+### NetworkPolicy
+
+Contrôle du trafic réseau
+
+```yaml
+# networkpolicy.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-specific
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: database
+    ports:
+    - protocol: TCP
+      port: 5432
+```
+
+---
+
+## 💾 Storage
+
+### PersistentVolume (PV)
+
+```yaml
+# pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-data
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /mnt/data
+```
+
+### PersistentVolumeClaim (PVC)
+
+```yaml
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+```
+
+### Utilisation dans un Pod
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-storage
+spec:
+  containers:
+  - name: app
+    image: nginx
+    volumeMounts:
+    - mountPath: /data
+      name: storage
+  volumes:
+  - name: storage
+    persistentVolumeClaim:
+      claimName: pvc-data
+```
+
+---
+
+## 🔐 ConfigMaps & Secrets
+
+### ConfigMap
 
 ```yaml
 # configmap.yaml
@@ -638,7 +908,7 @@ metadata:
 data:
   APP_ENV: "production"
   APP_DEBUG: "false"
-  DATABASE_HOST: "db.example.com"
+  DATABASE_URL: "postgresql://db:5432/myapp"
   config.json: |
     {
       "server": {
@@ -648,10 +918,17 @@ data:
     }
 ```
 
-**Utilisation dans un Pod :**
+```bash
+# Créer depuis un fichier
+kubectl create configmap app-config --from-file=config.properties
+
+# Créer depuis des littéraux
+kubectl create configmap app-config --from-literal=ENV=prod --from-literal=DEBUG=false
+```
+
+### Utilisation dans un Pod
 
 ```yaml
-# pod-with-configmap.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -660,26 +937,17 @@ spec:
   containers:
   - name: app
     image: myapp:latest
-    # Méthode 1 : Variables d'environnement
-    envFrom:
-    - configMapRef:
-        name: app-config
-    
-    # Méthode 2 : Variables spécifiques
     env:
     - name: APP_ENV
       valueFrom:
         configMapKeyRef:
           name: app-config
           key: APP_ENV
-    
-    # Méthode 3 : Monter comme fichier
     volumeMounts:
-    - name: config-volume
+    - name: config
       mountPath: /etc/config
-  
   volumes:
-  - name: config-volume
+  - name: config
     configMap:
       name: app-config
 ```
@@ -688,34 +956,34 @@ spec:
 
 ### Secret
 
-Stocke des données sensibles (encodées en base64).
-
 ```yaml
 # secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: db-secret
+  name: app-secret
 type: Opaque
 data:
-  username: YWRtaW4=          # admin en base64
-  password: c3VwZXJzZWNyZXQ=  # supersecret en base64
+  username: YWRtaW4=          # base64: admin
+  password: cGFzc3dvcmQxMjM=  # base64: password123
 ```
 
 ```bash
 # Créer un secret
-echo -n 'admin' | base64
-echo -n 'supersecret' | base64
-
-kubectl apply -f secret.yaml
-
-# Ou directement
-kubectl create secret generic db-secret \
+kubectl create secret generic app-secret \
   --from-literal=username=admin \
-  --from-literal=password=supersecret
+  --from-literal=password=password123
+
+# Depuis un fichier
+kubectl create secret generic app-secret --from-file=./secret.txt
+
+# TLS secret
+kubectl create secret tls tls-secret \
+  --cert=path/to/tls.cert \
+  --key=path/to/tls.key
 ```
 
-**Utilisation dans un Pod :**
+### Utilisation dans un Pod
 
 ```yaml
 apiVersion: v1
@@ -730,287 +998,77 @@ spec:
     - name: DB_USERNAME
       valueFrom:
         secretKeyRef:
-          name: db-secret
+          name: app-secret
           key: username
     - name: DB_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: db-secret
+          name: app-secret
           key: password
-```
-
----
-
-### Ingress
-
-Gère l'accès HTTP/HTTPS externe aux services.
-
-```yaml
-# ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: app-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - host: myapp.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx-service
-            port:
-              number: 80
-  - host: api.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: api-service
-            port:
-              number: 3000
-```
-
-⚠️ **Nécessite un Ingress Controller** (nginx, traefik, etc.)
-
----
-
-## 🚀 Déploiement d'Applications
-
-### Exemple complet : Application Node.js
-
-```yaml
-# app-deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nodejs-app
-  labels:
-    app: nodejs
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nodejs
-  template:
-    metadata:
-      labels:
-        app: nodejs
-    spec:
-      containers:
-      - name: nodejs
-        image: <votre_dockerhub_user>/<nom_image>:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: PORT
-          value: "3000"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nodejs-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: nodejs
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3000
-```
-
-```bash
-# Déployer
-kubectl apply -f app-deployment.yaml
-
-# Vérifier
-kubectl get deployments
-kubectl get pods
-kubectl get svc
-
-# Obtenir l'URL externe (si LoadBalancer)
-kubectl get svc nodejs-service
-
-# Logs
-kubectl logs -f deployment/nodejs-app
-
-# Mettre à jour l'image
-kubectl set image deployment/nodejs-app nodejs=<user>/<image>:v2
-
-# Scaler
-kubectl scale deployment nodejs-app --replicas=5
-```
-
----
-
-### Stratégies de déploiement
-
-```yaml
-# RollingUpdate (par défaut)
-spec:
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1        # Pods supplémentaires pendant update
-      maxUnavailable: 0  # Pods indisponibles pendant update
-
----
-# Recreate (stop all -> start all)
-spec:
-  strategy:
-    type: Recreate
-```
-
----
-
-## 📊 Mise à l'Échelle
-
-### Scaling manuel
-
-```bash
-# Scaler un deployment
-kubectl scale deployment <nom> --replicas=5
-
-# Scaler un ReplicaSet
-kubectl scale rs <nom> --replicas=3
-
-# Scaler un StatefulSet
-kubectl scale statefulset <nom> --replicas=2
-```
-
----
-
-### Horizontal Pod Autoscaler (HPA)
-
-```yaml
-# hpa.yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nodejs-hpa
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nodejs-app
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
-```
-
-```bash
-# Créer un HPA
-kubectl apply -f hpa.yaml
-
-# Ou via commande
-kubectl autoscale deployment nodejs-app --min=2 --max=10 --cpu-percent=70
-
-# Voir les HPA
-kubectl get hpa
-kubectl describe hpa nodejs-hpa
-
-# Supprimer
-kubectl delete hpa nodejs-hpa
-```
-
-⚠️ **Nécessite metrics-server installé**
-
----
-
-## 📈 Monitoring & Logs
-
-### Metrics Server
-
-```bash
-# Installer metrics-server
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-
-# Vérifier
-kubectl get deployment metrics-server -n kube-system
-
-# Utiliser
-kubectl top nodes
-kubectl top pods
-kubectl top pods --all-namespaces
-kubectl top pod <nom_pod> --containers
-```
-
----
-
-### Logs
-
-```bash
-# Logs d'un pod
-kubectl logs <nom_pod>
-kubectl logs -f <nom_pod>                # Suivre
-kubectl logs <nom_pod> --tail=100        # 100 dernières lignes
-kubectl logs <nom_pod> --since=1h        # Dernière heure
-kubectl logs <nom_pod> -c <conteneur>    # Conteneur spécifique
-kubectl logs <nom_pod> --previous        # Conteneur précédent (après crash)
-
-# Logs de tous les pods d'un deployment
-kubectl logs -f deployment/<nom>
-
-# Logs avec sélecteur
-kubectl logs -l app=nginx
 ```
 
 ---
 
 ## ✅ Bonnes Pratiques
 
-### 1. Ressources (requests & limits)
+### Organisation des fichiers
+
+```
+kubernetes/
+├── base/                    # Manifests communs
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── kustomization.yaml
+├── overlays/               # Configurations spécifiques
+│   ├── dev/
+│   │   ├── kustomization.yaml
+│   │   └── patches/
+│   ├── staging/
+│   └── production/
+└── scripts/
+    ├── deploy.sh
+    └── rollback.sh
+```
+
+### Labels et Annotations
+
+```yaml
+metadata:
+  labels:
+    app: myapp
+    version: v1.0.0
+    environment: production
+    component: backend
+    managed-by: kubectl
+  annotations:
+    description: "Application backend"
+    contact: "team@example.com"
+    deployment-date: "2025-01-29"
+```
+
+### Resource Limits
 
 ```yaml
 resources:
-  requests:      # Minimum garanti
+  requests:    # Ressources minimales
     memory: "64Mi"
     cpu: "250m"
-  limits:        # Maximum autorisé
+  limits:      # Ressources maximales
     memory: "128Mi"
     cpu: "500m"
 ```
 
-### 2. Health Checks
+### Health Checks
 
 ```yaml
-livenessProbe:   # Redémarre si échoue
+livenessProbe:
   httpGet:
-    path: /health
+    path: /healthz
     port: 8080
   initialDelaySeconds: 30
   periodSeconds: 10
 
-readinessProbe:  # Retire du service si échoue
+readinessProbe:
   httpGet:
     path: /ready
     port: 8080
@@ -1018,118 +1076,598 @@ readinessProbe:  # Retire du service si échoue
   periodSeconds: 5
 ```
 
-### 3. Labels et Selectors
+### Sécurité
 
 ```yaml
-metadata:
-  labels:
-    app: myapp
-    version: v1.0
-    environment: production
-    tier: frontend
-```
-
-### 4. Namespaces
-
-```bash
-# Séparer les environnements
-kubectl create namespace dev
-kubectl create namespace staging
-kubectl create namespace production
-```
-
-### 5. Resource Quotas
-
-```yaml
-apiVersion: v1
-kind: ResourceQuota
-metadata:
-  name: compute-quota
-  namespace: dev
-spec:
-  hard:
-    requests.cpu: "10"
-    requests.memory: "20Gi"
-    limits.cpu: "20"
-    limits.memory: "40Gi"
-    pods: "50"
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 2000
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
 ```
 
 ---
 
-## 🚨 Dépannage
+## 🐄 K3s - Kubernetes Léger
 
-### Pod ne démarre pas
+### Qu'est-ce que K3s ?
 
-```bash
-# 1. Vérifier le status
-kubectl get pods
+**K3s** est une distribution Kubernetes légère et certifiée, conçue pour :
+- 🎯 IoT et Edge Computing
+- 💻 Environnements de développement local
+- 🚀 Déploiements rapides
+- 📦 Faible empreinte mémoire (~512MB)
+- ⚡ Installation en une seule commande
 
-# 2. Détails du pod
-kubectl describe pod <nom_pod>
+### Installation de K3s
 
-# 3. Logs
-kubectl logs <nom_pod>
-
-# 4. Événements
-kubectl get events --sort-by='.lastTimestamp'
-
-# Causes courantes :
-# - ImagePullBackOff : Image introuvable
-# - CrashLoopBackOff : Le conteneur crash au démarrage
-# - Pending : Pas assez de ressources
-# - Error : Erreur de configuration
-```
-
-### Service inaccessible
+#### Installation Server (Master)
 
 ```bash
-# 1. Vérifier le service
-kubectl get svc <nom_service>
-kubectl describe svc <nom_service>
+# Installation standard
+curl -sfL https://get.k3s.io | sh -
 
-# 2. Vérifier les endpoints
-kubectl get endpoints <nom_service>
+# Vérifier l'installation
+sudo systemctl status k3s
 
-# 3. Vérifier les pods
-kubectl get pods -l app=<label>
+# Récupérer le token pour les agents
+sudo cat /var/lib/rancher/k3s/server/node-token
 
-# 4. Tester depuis un pod de debug
-kubectl run -it --rm debug --image=busybox --restart=Never -- sh
-wget -O- <nom_service>:<port>
+# Configuration kubectl
+sudo cat /etc/rancher/k3s/k3s.yaml
+mkdir -p ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown $USER:$USER ~/.kube/config
+
+# Vérifier
+kubectl get nodes
 ```
 
-### Problèmes de réseau
+#### Installation avec options
 
 ```bash
-# Pod de debug réseau
-kubectl run -it --rm debug --image=nicolaka/netshoot --restart=Never -- bash
+# Sans Traefik (ingress controller)
+curl -sfL https://get.k3s.io | sh -s - --disable traefik
 
-# Dans le pod :
-nslookup <service>
-curl <service>:<port>
-ping <service>
-traceroute <service>
+# Sans ServiceLB
+curl -sfL https://get.k3s.io | sh -s - --disable servicelb
+
+# Avec un port API personnalisé
+curl -sfL https://get.k3s.io | sh -s - --https-listen-port 6443
+
+# Installation complète personnalisée
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server \
+  --disable traefik \
+  --disable servicelb \
+  --write-kubeconfig-mode 644" sh -
 ```
+
+#### Installation Agent (Worker)
+
+```bash
+# Sur un autre serveur
+curl -sfL https://get.k3s.io | K3S_URL=https://<IP_MASTER>:6443 \
+  K3S_TOKEN=<TOKEN_FROM_MASTER> sh -
+
+# Vérifier sur le master
+kubectl get nodes
+```
+
+### Gestion de K3s
+
+```bash
+# Démarrer K3s
+sudo systemctl start k3s
+
+# Arrêter K3s
+sudo systemctl stop k3s
+
+# Redémarrer K3s
+sudo systemctl restart k3s
+
+# Statut
+sudo systemctl status k3s
+
+# Activer au démarrage
+sudo systemctl enable k3s
+
+# Logs
+sudo journalctl -u k3s -f
+
+# Désinstaller K3s server
+/usr/local/bin/k3s-uninstall.sh
+
+# Désinstaller K3s agent
+/usr/local/bin/k3s-agent-uninstall.sh
+```
+
+---
+
+## 🐳 Gestion des Images Docker avec K3s
+
+### Importer des images Docker dans K3s
+
+K3s utilise **containerd** au lieu de Docker, voici comment gérer les images :
+
+#### Méthode 1 : Sauvegarder et Importer
+
+```bash
+# 1. Créer une image Docker (sur votre machine de dev)
+docker build -t my-aspnetapp:latest .
+
+# 2. Sauvegarder l'image en tar
+docker save my-aspnetapp:latest > my-aspnetapp.tar
+
+# Ou avec compression
+docker save my-aspnetapp:latest | gzip > my-aspnetapp.tar.gz
+
+# 3. Transférer sur le serveur K3s
+scp my-aspnetapp.tar user@k3s-server:/tmp/
+
+# 4. Importer l'image dans K3s
+sudo k3s ctr images import /tmp/my-aspnetapp.tar
+
+# Ou si compressé
+gunzip < my-aspnetapp.tar.gz | sudo k3s ctr images import -
+
+# 5. Vérifier l'import
+sudo k3s ctr images list | grep my-aspnetapp
+
+# 6. Utiliser l'image dans un pod
+kubectl run my-app --image=my-aspnetapp:latest --image-pull-policy=Never
+```
+
+#### Méthode 2 : Registry Privé Local
+
+```bash
+# 1. Créer un registry local
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+# 2. Tagger l'image
+docker tag my-aspnetapp:latest localhost:5000/my-aspnetapp:latest
+
+# 3. Pousser vers le registry
+docker push localhost:5000/my-aspnetapp:latest
+
+# 4. Sur K3s, utiliser l'image
+kubectl run my-app --image=localhost:5000/my-aspnetapp:latest
+```
+
+#### Méthode 3 : Docker Hub
+
+```bash
+# 1. Se connecter à Docker Hub
+docker login
+
+# 2. Tagger l'image
+docker tag my-aspnetapp:latest <votre_user>/my-aspnetapp:latest
+
+# 3. Pousser l'image
+docker push <votre_user>/my-aspnetapp:latest
+
+# 4. Utiliser dans K3s
+kubectl run my-app --image=<votre_user>/my-aspnetapp:latest
+```
+
+### Commandes K3s pour les Images
+
+```bash
+# Lister toutes les images
+sudo k3s ctr images list
+sudo k3s ctr images ls
+
+# Rechercher une image spécifique
+sudo k3s ctr images list | grep <nom_image>
+
+# Supprimer une image
+sudo k3s ctr images remove <nom_image>
+
+# Exemple
+sudo k3s ctr images remove docker.io/library/my-aspnetapp:latest
+
+# Pull une image
+sudo k3s ctr images pull docker.io/library/nginx:latest
+
+# Tag une image
+sudo k3s ctr images tag <source> <target>
+
+# Informations sur une image
+sudo k3s ctr images check
+```
+
+### Configuration ImagePullPolicy
+
+```yaml
+# Toujours pull depuis le registry
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app
+    image: my-aspnetapp:latest
+    imagePullPolicy: Always  # Always, IfNotPresent, Never
+
+---
+# Utiliser l'image locale (importée)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app-local
+spec:
+  containers:
+  - name: app
+    image: my-aspnetapp:latest
+    imagePullPolicy: Never  # N'essaie pas de pull, utilise l'image locale
+```
+
+---
+
+## 🌐 Gestion des Volumes Persistants (PV/PVC)
+
+### Création de Volumes avec YAML
+
+#### PersistentVolume (PV)
+
+```yaml
+# pv-hostpath.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-data
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/mnt/data"
+    type: DirectoryOrCreate
+
+---
+# pv-nfs.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nfs
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    server: 192.168.1.100
+    path: "/exports/data"
+
+---
+# pv-aws-ebs.yaml (pour EKS)
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-aws-ebs
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp3
+  awsElasticBlockStore:
+    volumeID: vol-0123456789abcdef0
+    fsType: ext4
+```
+
+#### PersistentVolumeClaim (PVC)
+
+```yaml
+# pvc-data.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-data
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      type: local
+
+---
+# pvc-database.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-postgres
+  namespace: database
+spec:
+  storageClassName: fast-ssd
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+```
+
+### Utilisation dans un Deployment
+
+```yaml
+# deployment-with-volume.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-with-storage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: app
+        image: nginx:latest
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/nginx/html
+        - name: logs
+          mountPath: /var/log/nginx
+        - name: config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      # Volume persistant
+      - name: data
+        persistentVolumeClaim:
+          claimName: pvc-data
+      # EmptyDir (temporaire)
+      - name: logs
+        emptyDir: {}
+      # ConfigMap
+      - name: config
+        configMap:
+          name: nginx-config
+```
+
+### Types de Volumes
+
+```yaml
+# hostPath (développement uniquement)
+volumes:
+- name: host-volume
+  hostPath:
+    path: /data
+    type: DirectoryOrCreate
+
+# emptyDir (temporaire, effacé si pod supprimé)
+volumes:
+- name: cache
+  emptyDir: {}
+
+# emptyDir en mémoire
+volumes:
+- name: memory-cache
+  emptyDir:
+    medium: Memory
+    sizeLimit: 1Gi
+
+# ConfigMap
+volumes:
+- name: config
+  configMap:
+    name: app-config
+    items:
+    - key: config.json
+      path: config.json
+
+# Secret
+volumes:
+- name: secret
+  secret:
+    secretName: app-secret
+    defaultMode: 0400
+
+# NFS
+volumes:
+- name: nfs
+  nfs:
+    server: nfs-server.example.com
+    path: "/exports"
+
+# Git Repository
+volumes:
+- name: git-repo
+  gitRepo:
+    repository: "https://github.com/user/repo.git"
+    revision: "main"
+```
+
+### StorageClass
+
+```yaml
+# storageclass-fast.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp3
+  iops: "3000"
+  throughput: "125"
+  encrypted: "true"
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+---
+# storageclass-nfs.yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: nfs-server.example.com
+  share: /exports/data
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+```
+
+### Commandes pour les Volumes
+
+```bash
+# Lister les PV
+kubectl get pv
+kubectl get persistentvolumes
+
+# Lister les PVC
+kubectl get pvc
+kubectl get persistentvolumeclaims
+
+# Détails
+kubectl describe pv <nom>
+kubectl describe pvc <nom>
+
+# Créer depuis YAML
+kubectl apply -f pv.yaml
+kubectl apply -f pvc.yaml
+
+# Supprimer
+kubectl delete pvc <nom>
+kubectl delete pv <nom>
+
+# Voir l'utilisation
+kubectl get pvc -o custom-columns=NAME:.metadata.name,STATUS:.status.phase,VOLUME:.spec.volumeName,CAPACITY:.status.capacity.storage
+
+# Étendre un volume (si allowVolumeExpansion: true)
+kubectl edit pvc <nom>
+# Modifier spec.resources.requests.storage
+```
+
+---
+
+## 🔧 Configuration Avancée des Volumes
+
+### StatefulSet avec PVC Templates
+
+```yaml
+# statefulset-postgres.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 3
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+  # Automatic PVC creation
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast-ssd
+      resources:
+        requests:
+          storage: 10Gi
+```
+
+### Backup et Restore de Volumes
+
+```yaml
+# job-backup.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backup-data
+spec:
+  template:
+    spec:
+      containers:
+      - name: backup
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          tar czf /backup/data-$(date +%Y%m%d-%H%M%S).tar.gz -C /data .
+        volumeMounts:
+        - name: data
+          mountPath: /data
+          readOnly: true
+        - name: backup
+          mountPath: /backup
+      restartPolicy: OnFailure
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: pvc-data
+      - name: backup
+        hostPath:
+          path: /backups
+          type: DirectoryOrCreate
+```
+
+---
+
+## 🔗 Guides Spécifiques
+
+Pour des guides détaillés sur des implémentations spécifiques de Kubernetes :
+
+### 📘 [EKS - Amazon Elastic Kubernetes Service](./eks.md)
+Guide complet pour déployer Kubernetes sur AWS avec Terraform
+
+### 📗 [Minikube - Kubernetes Local](./minikube.md)
+Guide pour installer et utiliser Kubernetes en local pour le développement
+
+### 🐄 [K3s - Kubernetes Léger](./k3s.md)
+Guide détaillé pour K3s, parfait pour IoT, Edge et environnements de développement
 
 ---
 
 ## 📚 Ressources Complémentaires
 
-- [Documentation Kubernetes](https://kubernetes.io/docs/)
-- [Kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+- [Documentation officielle Kubernetes](https://kubernetes.io/docs/)
+- [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 - [Kubernetes Patterns](https://k8spatterns.io/)
-- [KubeAcademy](https://kube.academy/)
-
-### Outils utiles
-- **k9s** : Interface TUI pour Kubernetes
-- **Lens** : IDE pour Kubernetes
-- **Helm** : Gestionnaire de packages pour K8s
-- **Kustomize** : Personnalisation de manifests YAML
-- **Stern** : Multi-pod log tailing
-
----
-
-**Pour aller plus loin :**
-- [Guide EKS (AWS)](./eks.md) - Kubernetes managé sur AWS
-- [Guide Minikube](./minikube.md) - Kubernetes local pour développement
+- [Awesome Kubernetes](https://github.com/ramitsurana/awesome-kubernetes)
+- [K3s Documentation](https://docs.k3s.io/)
+- [Rancher Documentation](https://rancher.com/docs/)
