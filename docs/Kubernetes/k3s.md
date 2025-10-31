@@ -550,6 +550,49 @@ kubectl get services
 kubectl get svc node-app-service
 curl http://<NODE_IP>:80
 ```
+### Déploiement avec Helm
+
+**Helm** simplifie le déploiement d'applications complexes sur K3s.
+
+#### Installation rapide avec Helm
+
+```bash
+# Installer Helm si ce n'est pas déjà fait
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Ajouter des repositories
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add stable https://charts.helm.sh/stable
+helm repo update
+
+# Installer WordPress
+helm install my-wordpress bitnami/wordpress
+
+# Installer PostgreSQL
+helm install my-db bitnami/postgresql \
+  --set auth.postgresPassword=changeme
+
+# Voir les releases
+helm list
+
+# Accéder aux services (avec ServiceLB)
+kubectl get svc
+```
+
+#### Guide Complet Helm
+
+Pour une utilisation avancée de Helm avec K3s :
+
+📖 **[Guide Helm Complet](./helm.md)**
+
+Contenu du guide Helm :
+- Installation et configuration
+- Gestion des Charts et Releases
+- Création de Charts personnalisés
+- Templating et Values
+- Repositories et Artifact Hub
+- **Section dédiée K3s** avec exemples spécifiques
+- Bonnes pratiques
 
 ---
 
