@@ -170,14 +170,92 @@ Guide complet pour conteneuriser et déployer vos applications avec Docker.
 ### ☸️ Kubernetes
 Orchestrez vos conteneurs à grande échelle avec Kubernetes.
 
-📖 [Documentation Kubernetes](docs/Kubernetes/kubernetes.md)
+📖 [Documentation Kubernetes - Guide Général](docs/Kubernetes/kubernetes.md)
 
-**Contenu :**
-- 🔹 Pods, Services, Deployments
-- 🔹 ConfigMaps et Secrets
-- 🔹 Ingress et Load Balancing
-- 🔹 Scaling et monitoring
-- 🔹 Helm charts
+**Vue d'ensemble :**
+Le guide principal couvre tous les concepts fondamentaux de Kubernetes :
+- 🏗️ Architecture complète (Control Plane, Worker Nodes)
+- 🧩 Concepts fondamentaux (Pods, Services, Deployments, etc.)
+- 📥 Installation kubectl (Linux, macOS, Windows)
+- 🎮 Commandes kubectl essentielles (200+ commandes)
+- 📦 Objets Kubernetes détaillés (Pods, Deployments, Services, StatefulSet, etc.)
+- 🌐 Networking (Ingress, NetworkPolicy)
+- 💾 Storage (PV, PVC, StorageClass)
+- 🔐 ConfigMaps & Secrets
+- ✅ Bonnes pratiques
+
+---
+
+**Guides d'Installation Spécifiques :**
+
+Choisissez le guide adapté à votre environnement :
+
+| Guide | Description | Cas d'usage | Lien |
+|-------|-------------|-------------|------|
+| 📗 **Minikube** | Kubernetes local sur votre machine | Développement, apprentissage, tests | [Guide Minikube](docs/Kubernetes/minikube.md) |
+| 🐄 **K3s** | Kubernetes léger et rapide | IoT, Edge, Raspberry Pi, serveurs légers | [Guide K3s](docs/Kubernetes/k3s.md) |
+| 📘 **EKS** | Kubernetes managé sur AWS | Production, cloud AWS, haute disponibilité | [Guide EKS](docs/Kubernetes/eks.md) |
+
+#### 📗 Minikube - Kubernetes Local
+**Pour le développement local et l'apprentissage**
+
+Contenu :
+- Installation multi-plateformes (Linux, macOS, Windows)
+- Tous les drivers (Docker, VirtualBox, KVM, Hyper-V)
+- Gestion des images Docker (3 méthodes)
+- Addons (Dashboard, Ingress, Metrics, Registry)
+- Multi-clusters avec profiles
+- Tunneling pour LoadBalancer
+- Monitoring et Dashboard intégré
+- Dépannage complet
+
+#### 🐄 K3s - Kubernetes Léger
+**Pour IoT, Edge Computing et environnements contraints**
+
+Contenu :
+- Installation ultra-rapide (1 commande)
+- Configuration server et agents
+- **Gestion des images Docker** :
+  - `docker save` → `k3s ctr images import`
+  - Toutes les commandes `k3s ctr`
+  - Registry privé local
+- Cluster multi-nodes
+- High Availability (HA)
+- Stockage avec Local Path Provisioner
+- Optimisation pour faible consommation RAM
+
+#### 📘 EKS - Amazon Elastic Kubernetes Service
+**Pour la production sur AWS avec Terraform**
+
+Contenu :
+- Installation complète des outils (AWS CLI, kubectl, Terraform)
+- Configuration IAM détaillée
+- Infrastructure Terraform complète :
+  - VPC, Subnets, Security Groups
+  - Cluster EKS et Node Groups
+  - Variables et outputs
+- Configuration kubectl pour EKS
+- Déploiement d'applications depuis Docker Hub
+- Scaling (cluster et applications)
+- Monitoring avec CloudWatch
+- Sécurité (RBAC, Secrets Manager)
+- Optimisation des coûts
+- Dépannage spécifique EKS
+
+---
+
+**Tableau Comparatif :**
+
+| Critère | Minikube | K3s | EKS |
+|---------|----------|-----|-----|
+| **Environnement** | Local | Local/Serveur | AWS Cloud |
+| **Complexité** | 🟢 Simple | 🟢 Simple | 🟡 Moyenne |
+| **Coût** | Gratuit | Gratuit | ~$150/mois |
+| **RAM minimale** | 2GB | 512MB | N/A (cloud) |
+| **Production** | ❌ Non | ✅ Oui | ✅ Oui |
+| **Installation** | 5 min | 1 min | 20 min |
+| **Multi-nodes** | ✅ Oui | ✅ Oui | ✅ Oui |
+| **Dashboard** | ✅ Intégré | ❌ Non | ⚠️ Optionnel |
 
 ---
 
