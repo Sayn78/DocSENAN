@@ -195,6 +195,7 @@ Choisissez le guide adapté à votre environnement :
 | 📗 **Minikube** | Kubernetes local sur votre machine | Développement, apprentissage, tests | [Guide Minikube](docs/Kubernetes/minikube.md) |
 | 🐄 **K3s** | Kubernetes léger et rapide | IoT, Edge, Raspberry Pi, serveurs légers | [Guide K3s](docs/Kubernetes/k3s.md) |
 | 📘 **EKS** | Kubernetes managé sur AWS | Production, cloud AWS, haute disponibilité | [Guide EKS](docs/Kubernetes/eks.md) |
+| ⎈ **Helm** | Package Manager pour Kubernetes | Déploiement simplifié, gestion d'applications | [Guide Helm](docs/Kubernetes/helm.md) |
 
 #### 📗 Minikube - Kubernetes Local
 **Pour le développement local et l'apprentissage**
@@ -207,6 +208,7 @@ Contenu :
 - Multi-clusters avec profiles
 - Tunneling pour LoadBalancer
 - Monitoring et Dashboard intégré
+- Déploiement avec Helm
 - Dépannage complet
 
 #### 🐄 K3s - Kubernetes Léger
@@ -223,6 +225,7 @@ Contenu :
 - High Availability (HA)
 - Stockage avec Local Path Provisioner
 - Optimisation pour faible consommation RAM
+- Déploiement avec Helm
 
 #### 📘 EKS - Amazon Elastic Kubernetes Service
 **Pour la production sur AWS avec Terraform**
@@ -239,8 +242,27 @@ Contenu :
 - Scaling (cluster et applications)
 - Monitoring avec CloudWatch
 - Sécurité (RBAC, Secrets Manager)
+- Déploiement avec Helm (AWS Load Balancer Controller, etc.)
 - Optimisation des coûts
 - Dépannage spécifique EKS
+
+#### ⎈ Helm - Package Manager pour Kubernetes
+**Le gestionnaire de paquets pour Kubernetes**
+
+Contenu :
+- 📥 Installation (Linux, macOS, Windows)
+- 🧩 Concepts fondamentaux (Charts, Releases, Repositories)
+- 🎮 Commandes essentielles (install, upgrade, rollback)
+- 📚 Repositories populaires (Bitnami, Prometheus, Ingress NGINX)
+- 🔨 Créer ses propres Charts
+- 📝 Templating avancé (values, conditions, boucles)
+- ⚙️ Gestion des Values par environnement
+- 🪝 Hooks (pre-install, post-upgrade, etc.)
+- 📗 **Utilisation avec Minikube**
+- 🐄 **Utilisation avec K3s**
+- 📘 **Utilisation avec EKS**
+- ✅ Bonnes pratiques
+- 🔧 Dépannage
 
 ---
 
@@ -256,6 +278,7 @@ Contenu :
 | **Installation** | 5 min | 1 min | 20 min |
 | **Multi-nodes** | ✅ Oui | ✅ Oui | ✅ Oui |
 | **Dashboard** | ✅ Intégré | ❌ Non | ⚠️ Optionnel |
+| **Helm compatible** | ✅ Oui | ✅ Oui | ✅ Oui |
 
 ---
 
