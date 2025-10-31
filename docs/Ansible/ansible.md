@@ -1801,36 +1801,4 @@ ansible-doc -s apt                # Snippets
 
 ---
 
-## 🎓 Exercices Pratiques
-
-### Exercice 1 : Configuration de serveurs web
-Créer un playbook qui :
-- Installe nginx
-- Configure un virtual host
-- Déploie un site statique
-- Configure SSL/TLS
-
-### Exercice 2 : Stack LAMP
-Déployer une stack complète :
-- Linux (Ubuntu)
-- Apache/Nginx
-- MySQL/PostgreSQL
-- PHP
-
-### Exercice 3 : CI/CD avec Ansible
-Créer un pipeline de déploiement :
-- Build de l'application
-- Tests automatisés
-- Déploiement en staging
-- Déploiement en production
-
-### Exercice 4 : Infrastructure multi-tiers
-Déployer une architecture :
-- Load balancer (HAProxy/Nginx)
-- Serveurs web (3 instances)
-- Base de données (master/slave)
-- Monitoring (Prometheus/Grafana)
-
----
-
 **🎉 Vous maîtrisez maintenant Ansible !**
