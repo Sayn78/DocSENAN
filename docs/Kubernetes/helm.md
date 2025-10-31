@@ -1146,16 +1146,3 @@ annotations:
   # Supprimer avant lancement d'un nouveau hook
   "helm.sh/hook-delete-policy": before-hook-creation
 ```
-
----
-
-## 📗 Helm avec Minikube
-
-```bash
-# 1. Démarrer Minikube
-minikube start
-
-# 2. Vérifier que kubectl fonctionne
-kubectl get nodes
-
-# 3. Ajouter des
