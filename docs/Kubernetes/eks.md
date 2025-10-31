@@ -936,4 +936,70 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/secrets-store
 | Data transfer | Variable |
 | **Total estimé** | **~$153/mois** |
 
-### Optimisations
+## 📦 Déploiement avec Helm
+
+**Helm** simplifie considérablement le déploiement d'applications sur EKS.
+
+### Installation rapide avec Helm
+
+```bash
+# Installer Helm si ce n'est pas déjà fait
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# Ajouter des repositories
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update
+
+# Installer des applications populaires
+helm install my-wordpress bitnami/wordpress
+helm install my-db bitnami/postgresql
+
+# Installer AWS Load Balancer Controller (pour Ingress)
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=mon-cluster-eks
+
+# Voir les releases
+helm list --all-namespaces
+```
+
+### Guide Complet Helm
+
+Pour une utilisation avancée de Helm avec EKS :
+
+📖 **[Guide Helm Complet](./helm.md)**
+
+Contenu du guide Helm :
+- Installation et configuration
+- Gestion des Charts et Releases
+- Création de Charts personnalisés
+- Templating et Values
+- **Section dédiée EKS** avec exemples spécifiques
+- Intégration avec AWS services (ALB, EBS, etc.)
+- Bonnes pratiques pour la production
+
+---
+
+## 📚 Ressources Complémentaires
+
+### Documentation Officielle
+- [Amazon EKS Documentation](https://docs.aws.amazon.com/eks/)
+- [EKS Best Practices Guide](https://aws.github.io/aws-eks-best-practices/)
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+
+### Guides Kubernetes Connexes
+- 📘 [Kubernetes - Guide Général](./kubernetes.md)
+- 📗 [Minikube - Kubernetes Local](./minikube.md)
+- 🐄 [K3s - Kubernetes Léger](./k3s.md)
+- ⎈ [Helm - Package Manager](./helm.md)
+
+### Outils AWS pour Kubernetes
+- [eksctl](https://eksctl.io/) - CLI pour EKS
+- [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/)
+- [EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+- [EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver)
+
+---
+
+**🎉 Votre cluster EKS est maintenant opérationnel !**
