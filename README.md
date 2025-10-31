@@ -133,11 +133,29 @@ Automatisez la configuration et le déploiement de vos serveurs.
 
 📖 [Documentation Ansible](docs/Ansible/ansible.md)
 
-**Ce que vous apprendrez :**
-- Playbooks et rôles
-- Gestion des inventaires
-- Déploiement automatisé
-- Configuration management
+**Contenu :**
+- 🎯 **Introduction** - Pourquoi Ansible, concepts fondamentaux
+- 📥 **Installation** - Multi-plateformes (Ubuntu, CentOS, macOS, pip)
+- ⚙️ **Configuration** - ansible.cfg, hiérarchie des fichiers
+- 📋 **Inventory** - Formats INI et YAML, groupes, variables
+- 🧩 **Modules essentiels** :
+  - Commandes (shell, command, script)
+  - Système (apt, yum, service, user, group)
+  - Fichiers (file, copy, template, fetch)
+  - Réseau (get_url, uri, wait_for)
+  - Docker (container, image, network, volume)
+- 📘 **Playbooks** - Structure, exécution, options avancées
+- 🔢 **Variables** - Types, filtres, facts, utilisation
+- 📦 **Roles** - Organisation, création, Ansible Galaxy
+- 🔐 **Ansible Vault** - Chiffrement de secrets
+- 🌐 **Exemple pratique complet** :
+  - Déploiement Nginx + Docker sur AWS EC2
+  - Fichiers de configuration
+  - Page HTML personnalisée
+  - Tests et vérifications
+- ✅ **Bonnes pratiques** - Organisation, naming, idempotence, sécurité
+- 🔧 **Dépannage** - SSH, privilèges, Docker, debug
+- 🚀 **Commandes de référence** - Cheat sheet complet
 
 ---
 
