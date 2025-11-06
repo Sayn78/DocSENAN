@@ -70,6 +70,116 @@ Guide complet pour installer et gérer vos bases de données SQL et NoSQL.
 
 ---
 
+## 🔄 CI/CD (Continuous Integration / Continuous Deployment)
+
+Automatisez vos pipelines de développement, de l'intégration du code jusqu'au déploiement en production.
+
+### Pourquoi le CI/CD ?
+
+- ✅ **Qualité du code** - Tests automatisés à chaque commit
+- 🚀 **Déploiements rapides** - Livraison automatisée et fiable
+- 🔍 **Feedback immédiat** - Détection précoce des bugs
+- 📉 **Réduction des risques** - Déploiements incrémentaux
+- ⚡ **Productivité** - Automatisation des tâches répétitives
+
+---
+
+### 🦊 GitLab CI/CD
+Solution CI/CD intégrée nativement à GitLab, idéale pour une configuration simple et efficace.
+
+📖 [Documentation GitLab CI](docs/CI-CD/gitlab-ci.md)
+
+**Points forts :**
+- 📝 Configuration déclarative via `.gitlab-ci.yml`
+- 🏃 Runners flexibles (Docker, Kubernetes, Shell)
+- 🔗 Intégration native avec GitLab
+- 🌍 Gestion des environnements et déploiements
+- 📦 Container Registry intégré
+
+**Contenu :**
+- 🏗️ Architecture et concepts clés (Stages, Jobs, Artifacts, Cache)
+- ⚙️ Configuration de base et avancée
+- 🔧 Variables et secrets
+- 🐳 Pipelines pour applications Node.js
+- 🐋 Pipelines Docker avec Kubernetes
+- 🏃‍♂️ Installation et configuration des GitLab Runners
+- 📊 Exemples pratiques complets
+- 💡 Bonnes pratiques et optimisation
+- 🐛 Debugging et dépannage
+- 🔐 Gestion de la sécurité
+- 📈 Intégrations (Slack, Code Quality)
+
+---
+
+### ⚙️ Jenkins
+Serveur d'automatisation open-source, extensible et très répandu dans l'industrie.
+
+📖 [Documentation Jenkins](docs/CI-CD/jenkins.md)
+
+**Points forts :**
+- 🔌 Écosystème riche avec plus de 1800 plugins
+- 📝 Pipelines as Code (Jenkinsfile)
+- 🌐 Support multi-plateformes et langages
+- 🎨 Interface web intuitive (+ Blue Ocean)
+- 👥 Grande communauté et documentation abondante
+
+**Contenu :**
+- 📥 Installation et configuration (Linux, Windows, macOS, Docker)
+- 🔧 Création de pipelines déclaratifs et scriptés
+- 🔗 Intégration avec Git, Docker, Kubernetes
+- 🔐 Gestion des credentials et secrets
+- 🎨 Blue Ocean pour une interface moderne
+- 🌿 Automatisation multi-branches
+- 📊 Monitoring et notifications
+- 🔄 Gestion des agents distribués
+- ✅ Bonnes pratiques de sécurité
+- 🐛 Dépannage et optimisation
+
+---
+
+### 📊 Comparaison GitLab CI vs Jenkins
+
+| Critère | GitLab CI | Jenkins |
+|---------|-----------|---------|
+| **Installation** | Intégré à GitLab | Installation séparée |
+| **Configuration** | YAML (`.gitlab-ci.yml`) | Groovy (Jenkinsfile) |
+| **Courbe d'apprentissage** | 🟢 Rapide | 🟡 Modérée |
+| **Extensibilité** | 🟡 Limitée | 🟢 Très extensible (1800+ plugins) |
+| **Interface** | 🟢 Moderne | 🟡 Classique (Blue Ocean disponible) |
+| **Gestion des runners** | Intégrée | Via agents/nodes |
+| **Container Registry** | ✅ Inclus | ⚠️ Plugin nécessaire |
+| **Communauté** | Croissante | Très large et mature |
+| **Cas d'usage idéal** | Projets GitLab, DevOps | Projets complexes, Legacy |
+
+---
+
+**Choisir GitLab CI si :**
+- ✅ Vous utilisez déjà GitLab pour le versioning
+- ✅ Vous recherchez une solution tout-en-un
+- ✅ Vous privilégiez la simplicité de configuration
+- ✅ Vous démarrez un nouveau projet
+
+**Choisir Jenkins si :**
+- ✅ Vous avez des besoins d'intégration complexes
+- ✅ Vous utilisez des outils spécifiques nécessitant des plugins
+- ✅ Vous migrez depuis une infrastructure Jenkins existante
+- ✅ Vous avez besoin d'une personnalisation poussée
+
+---
+
+### 📖 Concepts CI/CD Communs
+
+Quel que soit l'outil choisi, les concepts fondamentaux restent similaires :
+
+- **Pipeline** : Séquence automatisée d'étapes
+- **Stages** : Phases du pipeline (build, test, deploy)
+- **Jobs** : Tâches individuelles à exécuter
+- **Artifacts** : Fichiers produits et partagés entre jobs
+- **Triggers** : Déclencheurs (push, merge request, schedule)
+- **Environments** : Cibles de déploiement (dev, staging, production)
+
+---
+
 ## ⚙️ Infrastructure as Code
 
 Automatisez la gestion de votre infrastructure avec les meilleurs outils du marché.
