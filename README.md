@@ -69,6 +69,15 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
 - [EKS](docs/Kubernetes/eks.md) - Production AWS
 - [Helm](docs/Kubernetes/helm.md) - Package Manager
 
+  ## [📊 Observabilité & Monitoring](#-observabilité--monitoring)
+- [Prometheus & Grafana](docs/monitoring.md)
+  - Installation & Configuration
+  - PromQL & Métriques
+  - Exporters
+  - AlertManager
+  - Dashboards Grafana
+  - Stack complète
+
 ## [💻 Commandes Essentielles](#-commandes-essentielles)
 - [Git](docs/Commande_Git.md)
   - Configuration & Branches
