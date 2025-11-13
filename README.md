@@ -31,7 +31,6 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Installation & Plugins
   - Jenkinsfile & Pipelines
   - Shared Libraries
-- [Comparaison GitLab CI vs Jenkins](#-comparaison-gitlab-ci-vs-jenkins)
 
 ## [⚙️ Infrastructure as Code](#️-infrastructure-as-code)
 - [Terraform](docs/terraform/terraform.md)
