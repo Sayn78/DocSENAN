@@ -53,6 +53,17 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Inventory & Variables
   - Ansible Vault
   - Exemples pratiques
+ 
+## [☁️ Cloud & Services AWS](#️-cloud--services-aws)
+- [AWS & AWS CLI](docs/aws-cli.md)
+  - Introduction à AWS
+  - Installation & Configuration AWS CLI
+  - Services principaux (S3, EC2, RDS, Lambda, IAM)
+  - CloudFormation & Infrastructure as Code
+  - CloudWatch & Monitoring
+  - VPC & Networking
+  - Bonnes pratiques & Sécurité
+  - Scripts d'automatisation
 
 ## [🐳 Containerisation & Orchestration](#-containerisation--orchestration)
 - [Docker](docs/Docker/docker.md)
