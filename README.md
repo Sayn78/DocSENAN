@@ -54,7 +54,9 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Ansible Vault
   - Exemples pratiques
  
-## [☁️ Cloud & Services AWS](#️-cloud--services-aws)
+## [☁️ Cloud Providers](#️-cloud-providers)
+
+### AWS (Amazon Web Services)
 - [AWS & AWS CLI](docs/aws-cli.md)
   - Introduction à AWS
   - Installation & Configuration AWS CLI
@@ -64,6 +66,20 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - VPC & Networking
   - Bonnes pratiques & Sécurité
   - Scripts d'automatisation
+
+### Google Cloud Platform
+- [GCP & gcloud CLI](docs/google-cli.md)
+  - Installation & Configuration gcloud CLI
+  - Compute Engine (Machines Virtuelles)
+  - Cloud Storage (gsutil)
+  - Kubernetes Engine (GKE)
+  - Cloud Functions & Cloud Run
+  - Bases de données (Cloud SQL, Firestore, BigQuery)
+  - Réseaux, VPC & Load Balancing
+  - Identity and Access Management (IAM)
+  - Cloud Logging & Monitoring
+  - Facturation & Budgets
+  - Bonnes pratiques de sécurité et performance
 
 ## [🐳 Containerisation & Orchestration](#-containerisation--orchestration)
 - [Docker](docs/Docker/docker.md)
