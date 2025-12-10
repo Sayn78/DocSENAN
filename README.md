@@ -87,6 +87,21 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Volumes & Réseaux
   - Dockerfile & Multi-stage
   - Docker Compose
+- [Docker Swarm](docs/Docker/docker-swarm.md)
+  - Introduction & Concepts fondamentaux
+  - Installation & Configuration du cluster
+  - **Déploiement avec docker-compose**
+    - Différences docker-compose vs docker stack
+    - Section deploy complète
+    - Gestion des secrets et configs
+    - Exemples pratiques (WordPress, microservices)
+    - Variables d'environnement
+    - Mises à jour et rollback
+  - Services et stacks
+  - Réseaux overlay et volumes
+  - Mise à l'échelle et rolling updates
+  - Monitoring et maintenance
+  - Bonnes pratiques production
 - [Kubernetes](docs/Kubernetes/kubernetes.md)
   - Concepts & Architecture
   - kubectl Commands
