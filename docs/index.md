@@ -31,7 +31,7 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Qualité de code
   - Sécurité SAST
   - Conventional Commits
-  
+
 ## [🔄 CI/CD](#-cicd-continuous-integration--continuous-deployment)
 - [GitLab CI](docs/CI-CD/gitlab-ci.md)
   - Configuration & Pipelines
@@ -53,7 +53,7 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Inventory & Variables
   - Ansible Vault
   - Exemples pratiques
- 
+
 ## [☁️ Cloud Providers](#️-cloud-providers)
 
 ### AWS (Amazon Web Services)
@@ -129,7 +129,7 @@ Bienvenue dans mon hub de documentation technique ! Vous trouverez ici toutes le
   - Système & Processus
   - Réseau & Sécurité
   - Maintenance
-  
+
 ---
 
 ## 🌐 Site de Documentation
