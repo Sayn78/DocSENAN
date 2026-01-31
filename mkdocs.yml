@@ -1,0 +1,48 @@
+site_name: Documentation Hub
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Environnements de Développement: Development_Environment_Setup_Guide.md
+  - Bases de Données: DatabaseGuide.md
+  - Python & Outils: venv.md
+  - DevOps & Best Practices: shift-left.md
+  - CI/CD:
+      - GitLab CI: CI-CD/gitlab-ci.md
+      - Jenkins: CI-CD/jenkins.md
+  - Infrastructure as Code:
+      - Terraform: terraform/terraform.md
+      - Ansible: Ansible/ansible.md
+  - Cloud Providers:
+      - AWS & AWS CLI: aws-cli.md
+      - Google Cloud & gcloud CLI: google-cli.md
+  - Containerisation & Orchestration:
+      - Docker: Docker/docker.md
+      - Docker Swarm: Docker/docker-swarm.md
+      - Kubernetes: Kubernetes/kubernetes.md
+      - Minikube: Kubernetes/minikube.md
+      - K3s: Kubernetes/k3s.md
+      - EKS: Kubernetes/eks.md
+      - Helm: Kubernetes/helm.md
+  - Observabilité & Monitoring: monitoring.md
+  - Commandes Essentielles:
+      - Git: Commande_Git.md
+      - Commandes Utiles: Commande_utile.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html

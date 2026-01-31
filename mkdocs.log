@@ -1,0 +1,167 @@
+INFO    -  Building documentation...
+INFO    -  Cleaning site directory
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#nodejs--npm', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#python--flask', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#java--maven', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#net-core', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#php--composer', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#go', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Development_Environment_Setup_Guide.md#rust', but the target 'docs/Development_Environment_Setup_Guide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/DatabaseGuide.md#postgresql', but the target 'docs/DatabaseGuide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/DatabaseGuide.md#mariadbmysql', but the target 'docs/DatabaseGuide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/DatabaseGuide.md#mongodb', but the target 'docs/DatabaseGuide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/DatabaseGuide.md#redis', but the target 'docs/DatabaseGuide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/DatabaseGuide.md#comparaison--choix', but the target 'docs/DatabaseGuide.md' is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/venv.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/shift-left.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/CI-CD/gitlab-ci.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/CI-CD/jenkins.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/terraform/terraform.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Ansible/ansible.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/aws-cli.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/google-cli.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Docker/docker.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Docker/docker-swarm.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Kubernetes/kubernetes.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Kubernetes/minikube.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Kubernetes/k3s.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Kubernetes/eks.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Kubernetes/helm.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/monitoring.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Commande_Git.md', but the target is not found among documentation files.
+WARNING -  Doc file 'index.md' contains a link 'docs/Commande_utile.md', but the target is not found among documentation files.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains an unrecognized relative link 'LICENSE', it was left as is.
+INFO    -  Doc file 'index.md' contains a link '#️-environnements-de-développement', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#️-bases-de-données', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-python--outils', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-devops--best-practices', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-cicd-continuous-integration--continuous-deployment', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#️-infrastructure-as-code', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#️-cloud-providers', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-containerisation--orchestration', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-observabilité--monitoring', but there is no such anchor on this page.
+INFO    -  Doc file 'index.md' contains a link '#-commandes-essentielles', but there is no such anchor on this page.
+INFO    -  Doc file 'DatabaseGuide.md' contains a link '#-postgresql', but there is no such anchor on this page.
+INFO    -  Doc file 'DatabaseGuide.md' contains a link '#-mariadbmysql', but there is no such anchor on this page.
+INFO    -  Doc file 'DatabaseGuide.md' contains a link '#-mongodb', but there is no such anchor on this page.
+INFO    -  Doc file 'DatabaseGuide.md' contains a link '#-redis', but there is no such anchor on this page.
+INFO    -  Doc file 'DatabaseGuide.md' contains a link '#-comparaison--choix', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#à-propos', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#prérequis', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#nodejs--npm', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#python--flask', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#java--maven', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#php--composer', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#vérification', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'Development_Environment_Setup_Guide.md' contains a link '#bonnes-pratiques-de-sécurité', but there is no such anchor on this page.
+INFO    -  Doc file 'aws-cli.md' contains a link '#introduction-à-aws', but there is no such anchor on this page.
+INFO    -  Doc file 'aws-cli.md' contains a link '#aws-cli---installation-et-configuration', but there is no such anchor on this page.
+INFO    -  Doc file 'google-cli.md' contains a link '#introduction-à-google-cloud-platform', but there is no such anchor on this page.
+INFO    -  Doc file 'google-cli.md' contains a link '#bases-de-données', but there is no such anchor on this page.
+INFO    -  Doc file 'google-cli.md' contains a link '#réseaux-et-sécurité', but there is no such anchor on this page.
+INFO    -  Doc file 'monitoring.md' contains a link '#promql---langage-de-requête', but there is no such anchor on this page.
+INFO    -  Doc file 'monitoring.md' contains a link '#stack-complète-de-monitoring', but there is no such anchor on this page.
+INFO    -  Doc file 'monitoring.md' contains a link '#-monitoring---prometheus--grafana', but there is no such anchor on this page.
+INFO    -  Doc file 'shift-left.md' contains a link '#outils-de-qualité-de-code', but there is no such anchor on this page.
+INFO    -  Doc file 'shift-left.md' contains a link '#tests-automatisés', but there is no such anchor on this page.
+INFO    -  Doc file 'shift-left.md' contains a link '#sécurité-sast', but there is no such anchor on this page.
+INFO    -  Doc file 'shift-left.md' contains a link '#-shift-left---bonnes-pratiques-devops', but there is no such anchor on this page.
+INFO    -  Doc file 'venv.md' contains a link '#création-dun-environnement-virtuel', but there is no such anchor on this page.
+INFO    -  Doc file 'venv.md' contains a link '#activation-et-désactivation', but there is no such anchor on this page.
+INFO    -  Doc file 'venv.md' contains a link '#gestion-des-dépendances', but there is no such anchor on this page.
+INFO    -  Doc file 'venv.md' contains a link '#-python-venv---environnements-virtuels', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-installation', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-configuration-de-base', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-inventory', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-modules-essentiels', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-playbooks', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-variables', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-roles', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-ansible-vault', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-exemple-pratique--nginx--docker', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-bonnes-pratiques', but there is no such anchor on this page.
+INFO    -  Doc file 'Ansible/ansible.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'Docker/docker-swarm.md' contains a link '#déploiement-avec-docker-compose', but there is no such anchor on this page.
+INFO    -  Doc file 'Docker/docker-swarm.md' contains a link '#réseaux-et-volumes', but there is no such anchor on this page.
+INFO    -  Doc file 'Docker/docker-swarm.md' contains a link '#mise-à-léchelle-et-rolling-updates', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-architecture-eks', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-prérequis', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-installation-des-outils', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-structure-du-projet-terraform', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-configuration-iam', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-déploiement-du-cluster-eks', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-configuration-kubectl', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-déploiement-dapplications', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-gestion-du-cluster', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-monitoring-et-logs', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-scaling', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-sécurité', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-coûts-et-optimisation', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/eks.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-installation', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-concepts-fondamentaux', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-commandes-essentielles', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-repositories', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-créer-un-chart', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-templating', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-values-et-configuration', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-hooks', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-helm-avec-minikube', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-helm-avec-k3s', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-helm-avec-eks', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-bonnes-pratiques', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/helm.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-prérequis', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-installation', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-configuration', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-gestion-des-images-docker', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-déploiement-dapplications', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-cluster-multi-nodes', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-high-availability', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-stockage', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-monitoring', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/k3s.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-guides-dinstallation', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-architecture-kubernetes', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-concepts-fondamentaux', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-installation-kubectl', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-commandes-kubectl-essentielles', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-objets-kubernetes', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-configuration--manifests', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-networking', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-storage', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-configmaps--secrets', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-bonnes-pratiques', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/kubernetes.md' contains a link '#-ressources-complémentaires', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-prérequis', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-installation', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-démarrage-et-configuration', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-gestion-du-cluster', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-addons', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-gestion-des-images-docker', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-déploiement-dapplications', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-accès-aux-services', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-profiles-et-multi-clusters', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-tunneling-et-loadbalancer', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-monitoring-et-dashboard', but there is no such anchor on this page.
+INFO    -  Doc file 'Kubernetes/minikube.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-introduction', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-installation', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-configuration-aws', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-premiers-pas', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-commandes-essentielles', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-structure-de-fichiers', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-ressources-avancées', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-state-management', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-modules', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-bonnes-pratiques', but there is no such anchor on this page.
+INFO    -  Doc file 'terraform/terraform.md' contains a link '#-dépannage', but there is no such anchor on this page.
+INFO    -  Documentation built in 4.74 seconds
+INFO    -  [21:58:42] Serving on http://127.0.0.1:8000/
